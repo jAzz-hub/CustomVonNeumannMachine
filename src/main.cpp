@@ -5,6 +5,22 @@
 
 using namespace std;
 
+
+// Processo é criado
+
+// Processo recebe uma UC
+
+// Thread fica pronta.
+
+// Thread começa a consumir um processo.
+
+// Thread 
+
+// Thread fica sabendo qual das UC ela vai atacar.
+
+// Thread ataca a UC que ela deveria.
+
+
 int main(int argc, char* argv[]){
 
     if (argc != 2) {
