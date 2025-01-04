@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(CustomVonNeumannMachine
         src/main.cpp
+        src/core.cpp
+        src/core.h
+        src/process.cpp
+        src/process.h
         src/loader.cpp
         src/loader.h
         src/cpu/CONTROL_UNIT.cpp

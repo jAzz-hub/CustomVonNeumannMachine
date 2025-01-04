@@ -17,6 +17,7 @@
 #include"./cpu/CONTROL_UNIT.h"
 #include"./memory/MAINMEMORY.h"
 #include"./loader.h"
+#include"./process.h"
 
 using namespace std;
 
@@ -30,8 +31,9 @@ struct core{
     int clock = 0;
     bool endProgram = false;
     Instruction_Data data;
+    process process;
 
-    core(memory, registers, uc, cForEnd, counter, clock, endP, Instruciton_D)
+    core(memory, registers, uc, cForEnd, counter, clock, endP, Instruciton_D, process)
     {
         this->ram = memory;
         this->registers = registers;
@@ -40,8 +42,8 @@ struct core{
         this->counter = counter;
         this->clock = clock;
         this->endProgram = endP;
-        this->clock = clock;
         this->Instruciton_Data = Instruciton_D;
+        this->process = process;
     }
 
     core(): MainMemory(2048,2048), REGISTER_BANK(), Control_Unit(), 5, 0, 0, false, Instruction_Data(){};
