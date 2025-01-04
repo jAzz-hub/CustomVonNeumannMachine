@@ -1,4 +1,0 @@
-/home/jeje/clones/CustomVonNeumannMachine/build/CMakeFiles/CustomVonNeumannMachine.dir
-/home/jeje/clones/CustomVonNeumannMachine/build/CMakeFiles/Assembler.dir
-/home/jeje/clones/CustomVonNeumannMachine/build/CMakeFiles/edit_cache.dir
-/home/jeje/clones/CustomVonNeumannMachine/build/CMakeFiles/rebuild_cache.dir

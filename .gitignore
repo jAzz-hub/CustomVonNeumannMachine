@@ -9,3 +9,5 @@ cmake_install.cmake
 
 CmakeFiles/CustomVonNeumannMachine
 CmakeFiles/Assembler
+build/
+CmakeFiles/
