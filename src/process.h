@@ -24,21 +24,19 @@ using namespace std;
 struct process{
 
     const std::string input_program;
-    int timestamp;
+    int timestamp = 0;
     const std::string state;
     int quantum;
     int id;
-    int mem_addr
+    int mem_addr; // Added missing semicolon
 
-    process(input_program, timestamp, state, id, mem_addr)
+    process(const std::string& input_program, int quantum, const std::string& state, int id, int mem_addr)
+    : input_program(input_program), quantum(quantum), state(state), id(id), mem_addr(mem_addr)
     {
-        this->input_program = input_program;
-        this->timestamp = timestamp;
-        this->state = state;
-        this->quantum = 0;
-        this->id = id;
-        this->mem_addr = mem_addr;
+        this->timestamp = 0;
     }
+    
+    void print_attributes() const;
 
 };
 

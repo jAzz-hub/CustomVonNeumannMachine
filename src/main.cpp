@@ -52,11 +52,16 @@ int main(int argc, char* argv[]){
 
     process p1 = process(argv[1], 3, "novo", 4828, 284);
     core c1 = core(ram, registers, UC, counterForEnd, counter, clock, endProgram, data, p1);
-
+    
+    c1.start();
+    
     pthread_t t1;
     pthread_create(&t1, NULL, tico, NULL);
 
     teco();
+
+    c1.running_asm();
+
     return 0;
 
 

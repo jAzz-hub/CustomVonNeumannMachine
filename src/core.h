@@ -16,6 +16,7 @@
 #include"./cpu/REGISTER_BANK.h"
 #include"./cpu/CONTROL_UNIT.h"
 #include"./memory/MAINMEMORY.h"
+#include"./memory/MEMORYCELL.h"
 #include"./loader.h"
 #include"./process.h"
 
@@ -31,24 +32,17 @@ struct core{
     int clock = 0;
     bool endProgram = false;
     Instruction_Data data;
-    process process;
+    process proc; // Renamed to avoid conflict
 
-    core(memory, registers, uc, cForEnd, counter, clock, endP, Instruciton_D, process)
+    core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc)
+        : ram(memory), registers(registers), UC(uc), counterForEnd(cForEnd), counter(counter), clock(clock), endProgram(endP), data(instruction_D), proc(proc)
     {
-        this->ram = memory;
-        this->registers = registers;
-        this->uc = UC;
-        this->counterForEnd = cForEnd;
-        this->counter = counter;
-        this->clock = clock;
-        this->endProgram = endP;
-        this->Instruciton_Data = Instruciton_D;
-        this->process = process;
     }
 
-    core(): MainMemory(2048,2048), REGISTER_BANK(), Control_Unit(), 5, 0, 0, false, Instruction_Data(){};
+    core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0) {}
 
-    void start(Process process,MainMemory ram);
-
+    void start();
+    void running_asm();
+    void execute();
 };
 #endif
