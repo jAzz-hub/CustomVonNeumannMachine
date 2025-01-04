@@ -51,3 +51,4 @@ struct core{
     void start(Process process,MainMemory ram);
 
 };
+#endif
