@@ -1,4 +1,4 @@
-/c/Users/getuio/Desktop/CustomVonNeumannMachine/CMakeFiles/CustomVonNeumannMachine.dir
-/c/Users/getuio/Desktop/CustomVonNeumannMachine/CMakeFiles/Assembler.dir
-/c/Users/getuio/Desktop/CustomVonNeumannMachine/CMakeFiles/edit_cache.dir
-/c/Users/getuio/Desktop/CustomVonNeumannMachine/CMakeFiles/rebuild_cache.dir
+/home/jeje/clones/CustomVonNeumannMachine/CMakeFiles/CustomVonNeumannMachine.dir
+/home/jeje/clones/CustomVonNeumannMachine/CMakeFiles/Assembler.dir
+/home/jeje/clones/CustomVonNeumannMachine/CMakeFiles/edit_cache.dir
+/home/jeje/clones/CustomVonNeumannMachine/CMakeFiles/rebuild_cache.dir

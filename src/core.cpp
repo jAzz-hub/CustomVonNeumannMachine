@@ -51,3 +51,4 @@ core core::running_asm(int quantum)
     }
     return *this;
 }
+

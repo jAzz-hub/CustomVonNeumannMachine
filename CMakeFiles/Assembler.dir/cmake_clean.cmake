@@ -1,9 +1,8 @@
 file(REMOVE_RECURSE
-  "Assembler.exe"
+  "Assembler"
   "Assembler.pdb"
   "CMakeFiles/Assembler.dir/assembler/assembler.cpp.o"
   "CMakeFiles/Assembler.dir/assembler/assembler.cpp.o.d"
-  "libAssembler.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.

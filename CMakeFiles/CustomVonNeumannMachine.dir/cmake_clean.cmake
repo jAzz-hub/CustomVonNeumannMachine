@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/ALU.cpp.o"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/ALU.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/CONTROL_UNIT.cpp.o"
@@ -17,9 +19,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MEMORYCELL.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/SECONDARY_MEMORY.cpp.o"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/SECONDARY_MEMORY.cpp.o.d"
-  "CustomVonNeumannMachine.exe"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/process.cpp.o"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/process.cpp.o.d"
+  "CustomVonNeumannMachine"
   "CustomVonNeumannMachine.pdb"
-  "libCustomVonNeumannMachine.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.
