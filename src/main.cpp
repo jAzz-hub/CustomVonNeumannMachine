@@ -14,6 +14,13 @@ using namespace std;
 
 // Thread fica pronta.
 
+mutex mtx;
+condition_variable cv;
+bool turnA = true;
+size_t currentProcessIndex = 0;
+bool allProcessesConsumed = false;
+
+[core, processo]
 
 void thread_A_start(core &c1) {
     while (true) { // loop infinito
@@ -117,20 +124,20 @@ int main(int argc, char* argv[]){
 
     c1.running_asm();
 
-    Considere que para cada processo que rodar
-    um novo core deve ser criado    
-    Toda vez que o pipeline for interrompido, ou seja que hip_A
-    for validada, core.zombie será tratado como true.
-    Se core.zombie for true, o core será removido da fila de cores.
+//    Considere que para cada processo que rodar
+//    um novo core deve ser criado    
+//    Toda vez que o pipeline for interrompido, ou seja que hip_A
+//    for validada, core.zombie será tratado como true.
+//    Se core.zombie for true, o core será removido da fila de cores.
 
 
-há uma fila de cores que é criada à partir de uma fila de programas
+//    há uma fila de cores que é criada à partir de uma fila de programas
     
-    de forma que quando a função running_asm parar 
+//    de forma que quando a função running_asm parar 
 
-    pois hip_A foi validada como verdadeira
+//    pois hip_A foi validada como verdadeira
 
-    o core é guardado no final de uma fila.
+//    o core é guardado no final de uma fila.
 
 
     return 0;
