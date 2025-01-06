@@ -17,6 +17,7 @@ PCB::PCB(const std::vector<std::string>& input_programs) {
             new_core.process.input_program = program;
             new_core.process.state = "waiting";
             new_core.process.id = id_counter++;
+            new_core.start();
             cores.push(new_core);
         }
     }

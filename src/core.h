@@ -13,16 +13,16 @@
 #define CORE_H
 
 #include <iostream>
-#include"./cpu/REGISTER_BANK.h"
-#include"./cpu/CONTROL_UNIT.h"
-#include"./memory/MAINMEMORY.h"
-#include"./memory/MEMORYCELL.h"
-#include"./loader.h"
-#include"./process.h"
+#include "main_memory.h"
+#include "register_bank.h"
+#include "control_unit.h"
+#include "instruction_data.h"
+#include "process.h"
+#include "./loader.h"
 
 using namespace std;
 
-struct core{
+struct core {
 
     MainMemory ram = MainMemory(2048,2048);				//  1º  Cria-se uma variável do tipo MainMemory com 2048 linhas e 2048 colunas.
     REGISTER_BANK registers;
@@ -31,6 +31,8 @@ struct core{
     int counter = 0;
     int clock = 0;
     bool endProgram = false;
+    bool zombie = false;
+    bool stop_flag = false;
     Instruction_Data data;
     process proc; // Renamed to avoid conflict
 
@@ -44,5 +46,8 @@ struct core{
     void start();
     void running_asm();
     void execute();
+    void setProcess(const process &proc) {
+        this->proc = proc;
+    }
 };
 #endif
