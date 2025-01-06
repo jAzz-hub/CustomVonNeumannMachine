@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <pthread.h>
+#include <unistd.h>
+
+// Estrutura que representa nossa "classe" com métodos
+typedef struct {
+    pthread_t thread;  // Identificador da thread
+    int quantum_A;     // Quantum para thread A
+    int quantum_B;     // Quantum para thread B
+
+    // Métodos da struct
+    void (*iniciar)(struct thread_control*);  // Método para inicializar a thread
+    void (*funcao_A)(struct thread_control*); // Função da thread A
+    void (*funcao_B)(struct thread_control*); // Função da thread B
+} thread_control;
+
+// Função para inicializar as threads
+void thread_iniciar(thread_control* t) {
+    pthread_create(&t->thread, NULL, (void* (*)(void*))t->funcao_A, t);
+}
+
+// Função da thread A
+void thread_funcao_A(thread_control* t) {
+    while (1) {
+        printf("Thread A está rodando...\n");
+        sleep(t->quantum_A);  // Simula o tempo de execução de A
+        printf("Thread A foi interrompida após %d segundos.\n", t->quantum_A);
+
+        // Alterna para a thread B
+        t->funcao_B(t);
+    }
+}
+
+// Função da thread B
+void thread_funcao_B(thread_control* t) {
+    printf("Thread B está rodando...\n");
+    sleep(t->quantum_B);  // Simula o tempo de execução de B
+    printf("Thread B foi interrompida após %d segundo.\n", t->quantum_B);
+
+    // Alterna para a thread A
+    t->funcao_A(t);
+}
+
+int main() {
+    // Cria e inicializa uma variável da struct
+    thread_control t = {0};  // Inicializa com valores padrão
+
+    t.quantum_A = 3;  // Quantum da thread A
+    t.quantum_B = 1;  // Quantum da thread B
+
+    // Associa as funções a métodos da struct
+    t.iniciar = thread_iniciar;
+    t.funcao_A = thread_funcao_A;
+    t.funcao_B = thread_funcao_B;
+
+    // Inicializa a thread A (a primeira a ser executada)
+    t.iniciar(&t);
+
+    // Aguarda a thread terminar (nunca vai terminar, pois está em loop)
+    pthread_join(t.thread, NULL);
+
+    return 0;
+}
