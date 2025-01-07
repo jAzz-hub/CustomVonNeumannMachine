@@ -37,6 +37,8 @@ void thread_A_start(core &c1) {
         
         turnA = false;
         cv.notify_all();
+
+        if (c1.zombie) break;
     }
 }
 
@@ -54,6 +56,8 @@ void thread_B_start(core &c2) {
         // Move the process to the end of the queue
         turnA = true;
         cv.notify_all();
+
+        if (c2.zombie) break;
     }
 }
 
@@ -63,7 +67,7 @@ void running_cores(PCB pcb)
     {
         if (pcb.cores.size() < 2) {
             cout << "Not enough cores to run." << endl;
-            break;
+            return;
         }
 
         thread t1(thread_A_start, ref(pcb.cores[0]));
@@ -105,7 +109,7 @@ void running_cores(PCB pcb)
         if (pcb.cores.empty())
         {
             cout << "All cores have been processed." << endl;
-            break;
+            return;
         }
     }
 }
@@ -124,8 +128,6 @@ int main(int argc, char* argv[]){
     for (const auto& program : input_programs) {
         std::cout << program << std::endl;
     }
-    return 0;
-
 
     running_cores(pcb);
 
@@ -159,5 +161,6 @@ int main(int argc, char* argv[]){
     return 0;
 
 }
+
 
 

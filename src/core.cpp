@@ -13,7 +13,7 @@ core& core::running_asm(int quantum)
     bool stop_flag = this->proc.timestamp % quantum == 0; // false na primeira iteração 
 
     //roda a pipeline
-    while(this->counterForEnd > 0)
+    while(this->counterForEnd > 0 && !this->zombie)
     {
         if (!stop_flag)
         {       
@@ -43,16 +43,17 @@ core& core::running_asm(int quantum)
                 this->UC.data.push_back(this->data) ;
                 this->UC.Fetch(this->registers, this->endProgram, this->ram);
             }
-            this->proc.timestamp++;
         }
         this->counter += 1;
         this->clock += 1;
-
+        break;
         if(this->endProgram == true){
-            this->counterForEnd =- 1;
+            this->counterForEnd = -1;
             this->zombie = true;
         }
 
+        // Adicionar mensagem de depuração
+        std::cout << "Core state: counterForEnd=" << this->counterForEnd << ", counter=" << this->counter << ", clock=" << this->clock << ", endProgram=" << this->endProgram << ", zombie=" << this->zombie << std::endl;
     }
     return *this;
 }
