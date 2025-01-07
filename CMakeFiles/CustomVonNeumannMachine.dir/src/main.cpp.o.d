@@ -268,7 +268,7 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o: \
  /home/jeje/clones/CustomVonNeumannMachine/src/././loader.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./././memory/MAINMEMORY.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./process.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./pcb.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/./PCB.h \
  /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
  /usr/include/c++/11/bits/deque.tcc \
  /home/jeje/clones/CustomVonNeumannMachine/src/./core.h

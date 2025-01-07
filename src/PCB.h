@@ -1,3 +1,6 @@
+#ifndef PCB_H
+#define PCB_H
+
 #include <deque>
 #include <string>
 #include "core.h"
@@ -8,3 +11,5 @@ struct PCB {
 
     PCB(const std::vector<std::string>& input_programs);
 };
+
+#endif

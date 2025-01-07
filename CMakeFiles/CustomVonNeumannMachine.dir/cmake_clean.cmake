@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/PCB.cpp.o"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/PCB.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/ALU.cpp.o"

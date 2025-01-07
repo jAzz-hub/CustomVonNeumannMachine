@@ -9,9 +9,7 @@
 #include "./loader.h"
 #include "./core.h"
 #include "./process.h"
-#include "./pcb.h"
-
-
+#include "./PCB.h"
 using namespace std;
 
 
@@ -61,69 +59,71 @@ void thread_B_start(core &c2) {
 
 void running_cores(PCB pcb)
 {
+    printf("aquiiii");
     while(true)
-    {
-        thread t1(thread_A_start, ref(pcb.cores.front()));
-        thread t2(thread_B_start, ref(pcb.cores[1]));
+    {  
+        if (pcb.cores.size() < 2) {
+            break;
+        }
 
+        thread t1(thread_A_start, ref(pcb.cores[0]));
+        thread t2(thread_B_start, ref(pcb.cores[1]));
+                
         t1.join();
         t2.join();
 
-
-        if (pcb.cores.front().stop_flag == true)
-        {
-	    core c1_aux = pcb.cores.front();
-	    core c2_aux = pcb.cores[1];
-            if (pcb.cores.front().zombie == true)
+        if (pcb.cores[0].stop_flag == true)
+        {   
+            if (pcb.cores[0].zombie == true)
             {
-		core c1_aux = pcb.cores.front();
-                pcb.zombies.push_back(c1_aux);
-		pcb.cores.pop_front();
-	    }
+                pcb.zombies.push_back(pcb.cores.front());
+                pcb.cores.pop_front();
+            }
             else
             {
-                //se não for zombie mas parou de rodar.
-		// vai pro final da fila
-		pcb.cores.push_back(c1_aux);
-		pcb.cores.pop_front();
+                // Move core to the end of the queue
+                pcb.cores.push_back(pcb.cores.front());
+                pcb.cores.pop_front();
             }
+        }
 
-
+        if (pcb.cores[1].stop_flag == true)
+        {   
             if (pcb.cores[1].zombie == true)
-    	    {
-                pcb.zombies.push_back(c2_aux);
-		pcb.cores.erase(pcb.cores.begin() + 1);
+            {
+                pcb.zombies.push_back(pcb.cores[1]);
+                pcb.cores.erase(pcb.cores.begin() + 1);
             }
             else
             {
-		//c2 vai pro final da fila
-	    	pcb.cores.push_back(c2_aux);
-		pcb.cores.erase(pcb.cores.begin() + 1);
-	    }
+                // Move core to the end of the queue
+                pcb.cores.push_back(pcb.cores[1]);
+                pcb.cores.erase(pcb.cores.begin() + 1);
+            }
         }
 
-
-        if(pcb.cores.empty())
+        if (pcb.cores.empty())
         {
-            false;
             break;
-            	
         }
+    printf("aqui");
     }
 }
 
 int main(int argc, char* argv[]){
 
-    if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <input_file>" << std::endl;
-    return 1;
-    }
+    // if (argc != 2) {
+    // std::cerr << "Usage: " << argv[0] << " <input_file>" << std::endl;
+    // return 1;
+    // }
 
     std::cout<<argv<<std::endl;
+    
+    std::vector<std::string> input_programs(argv + 1, argv + argc);
 
-    // PCB pcb = PCB(argv, argc);
+    PCB pcb = PCB(input_programs);
 
-    // running_cores(pcb);
+    running_cores(pcb);
 
     return 0 ;
 
@@ -136,23 +136,23 @@ int main(int argc, char* argv[]){
 
     //3º Inicia-se a função rodando os cores()
 
+//     Considere que para cada processo que rodar
+//     um novo core deve ser criado    
+//     Toda vez que o pipeline for interrompido, ou seja que hip_A
+//     for validada, core.zombie será tratado como true.
+//     Se core.zombie for true, o core será removido da fila de cores.
 
-//    Considere que para cada processo que rodar
-//    um novo core deve ser criado    
-//    Toda vez que o pipeline for interrompido, ou seja que hip_A
-//    for validada, core.zombie será tratado como true.
-//    Se core.zombie for true, o core será removido da fila de cores.
 
-
-//    há uma fila de cores que é criada à partir de uma fila de programas
+// há uma fila de cores que é criada à partir de uma fila de programas
     
-//    de forma que quando a função running_asm parar 
+//     de forma que quando a função running_asm parar 
 
-//    pois hip_A foi validada como verdadeira
+//     pois hip_A foi validada como verdadeira
 
-//    o core é guardado no final de uma fila.
+//     o core é guardado no final de uma fila.
 
 
     return 0;
 
 }
+

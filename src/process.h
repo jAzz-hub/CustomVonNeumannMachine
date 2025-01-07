@@ -23,9 +23,9 @@ using namespace std;
 
 struct process{
 
-    const std::string input_program;
+    std::string input_program;
     int timestamp = 0;
-    const std::string state;
+    std::string state;
     int quantum;
     int id;
     int mem_addr; // Added missing semicolon
@@ -35,9 +35,16 @@ struct process{
     {
         this->timestamp = 0;
     }
+
+    process() = default;
+    process(const process&) = default;
+    process& operator=(const process&) = default;
+    process(process&&) noexcept = default;
+    process& operator=(process&&) noexcept = default;
     
     void print_attributes() const;
 
 };
 
 #endif
+

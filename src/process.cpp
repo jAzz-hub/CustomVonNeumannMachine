@@ -8,3 +8,4 @@ void process::print_attributes() const {
     std::cout<<this->id<<std:: endl;
     std::cout<<this->mem_addr<<std:: endl;
 }
+

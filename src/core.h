@@ -43,8 +43,14 @@ struct core {
     core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0) {}
 
     void start();
-    void running_asm(int quantum);
+    core& running_asm(int quantum);
     void execute();
     void setProcess(process &proc);
+
+    core(const core&) = default;
+    core& operator=(const core&) = default;
+    core(core&&) noexcept = default;
+    core& operator=(core&&) noexcept = default;
 };
 #endif
+
