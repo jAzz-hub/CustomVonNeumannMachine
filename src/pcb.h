@@ -1,10 +1,10 @@
-#include <queue>
+#include <deque>
 #include <string>
 #include "core.h"
 
 struct PCB {
-    std::queue<core> cores;
-    std::queue<core> zombies;
+    std::deque<core> cores;
+    std::deque<core> zombies;
 
     PCB(const std::vector<std::string>& input_programs);
 };

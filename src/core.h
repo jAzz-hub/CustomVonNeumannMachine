@@ -13,10 +13,9 @@
 #define CORE_H
 
 #include <iostream>
-#include "main_memory.h"
-#include "register_bank.h"
-#include "control_unit.h"
-#include "instruction_data.h"
+#include "memory/MAINMEMORY.h"
+#include "cpu/REGISTER_BANK.h"
+#include "cpu/CONTROL_UNIT.h"
 #include "process.h"
 #include "./loader.h"
 
@@ -44,10 +43,8 @@ struct core {
     core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0) {}
 
     void start();
-    void running_asm();
+    void running_asm(int quantum);
     void execute();
-    void setProcess(const process &proc) {
-        this->proc = proc;
-    }
+    void setProcess(process &proc);
 };
 #endif

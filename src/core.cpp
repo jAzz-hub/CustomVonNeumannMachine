@@ -4,6 +4,10 @@ void core::start() {
     loadProgram(this->proc.input_program, this->ram);
 }
 
+void setProcess(process &proc) {
+	this->proc = proc;
+}
+
 core core::running_asm(int quantum)
 {
     bool stop_flag = this->timestamp % quantum == 0; // false na primeira iteração 
