@@ -59,21 +59,16 @@ void thread_B_start(core &c2) {
 
 void running_cores(PCB pcb)
 {
-    printf("aquiiii");
     while(true)
-    {  
-        if (pcb.cores.size() < 2) {
-            break;
-        }
-
+    {
         thread t1(thread_A_start, ref(pcb.cores[0]));
         thread t2(thread_B_start, ref(pcb.cores[1]));
-                
+
         t1.join();
         t2.join();
 
         if (pcb.cores[0].stop_flag == true)
-        {   
+        {
             if (pcb.cores[0].zombie == true)
             {
                 pcb.zombies.push_back(pcb.cores.front());
@@ -104,6 +99,7 @@ void running_cores(PCB pcb)
 
         if (pcb.cores.empty())
         {
+	    false;
             break;
         }
     printf("aqui");
