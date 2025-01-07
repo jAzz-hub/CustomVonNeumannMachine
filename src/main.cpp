@@ -1,10 +1,17 @@
-#include"./cpu/REGISTER_BANK.h"
-#include"./cpu/CONTROL_UNIT.h"
-#include"./memory/MAINMEMORY.h"
-#include"./loader.h"
-#include"./core.h"
-#include"./process.h"
-#include<pthread.h>
+#include <iostream>
+#include <vector>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include "./cpu/REGISTER_BANK.h"
+#include "./cpu/CONTROL_UNIT.h"
+#include "./memory/MAINMEMORY.h"
+#include "./loader.h"
+#include "./core.h"
+#include "./process.h"
+#include "./pcb.h"
+
+
 using namespace std;
 
 
@@ -20,7 +27,6 @@ bool turnA = true;
 size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
 
-[core, processo]
 
 void thread_A_start(core &c1) {
     while (true) { // loop infinito
@@ -56,42 +62,52 @@ void thread_B_start(core &c2) {
 void running_cores(PCB pcb)
 {
     while(true)
-    {  
-        thread t1(thread_A_start, ref(pcb.cores[i]), ref(processes));
-        thread t2(thread_B_start, ref(pcb.cores[i+1]), ref(processes));
-                
+    {
+        thread t1(thread_A_start, ref(pcb.cores.front()));
+        thread t2(thread_B_start, ref(pcb.cores[1]));
+
         t1.join();
         t2.join();
 
-        if (c1.stop_flag == true)
-        {   
-            if (c1.zombie == true)
+
+        if (pcb.cores.front().stop_flag == true)
+        {
+	    core c1_aux = pcb.cores.front();
+	    core c2_aux = pcb.cores[1];
+            if (pcb.cores.front().zombie == true)
             {
-                c1 = c1.pop();
-                PCB.zombie.append(c1);
-            }
+		core c1_aux = pcb.cores.front();
+                pcb.zombies.push_back(c1_aux);
+		pcb.cores.pop_front();
+	    }
             else
             {
-                string* aux1 = ;
-                string* aux2 = ;
-                pcb[]
-                pcb[]
+                //se não for zombie mas parou de rodar.
+		// vai pro final da fila
+		pcb.cores.push_back(c1_aux);
+		pcb.cores.pop_front();
             }
 
-            
-            if (c2.zombie == true)
+
+            if (pcb.cores[1].zombie == true)
     	    {
-                c2 = c2.pop();
-                PCB.zombie.append(c2);
+                pcb.zombies.push_back(c2_aux);
+		pcb.cores.erase(pcb.cores.begin() + 1);
             }
             else
-                //c2 vai pro final da fila
+            {
+		//c2 vai pro final da fila
+	    	pcb.cores.push_back(c2_aux);
+		pcb.cores.erase(pcb.cores.begin() + 1);
+	    }
         }
 
-        if pcb.cores.empty() == true
+
+        if(pcb.cores.empty())
         {
             false;
             break;
+            	
         }
     }
 }
@@ -120,9 +136,6 @@ int main(int argc, char* argv[]){
 
     //3º Inicia-se a função rodando os cores()
 
-    c1.start();
-
-    c1.running_asm();
 
 //    Considere que para cada processo que rodar
 //    um novo core deve ser criado    
