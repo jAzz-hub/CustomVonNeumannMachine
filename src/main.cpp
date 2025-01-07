@@ -63,7 +63,8 @@ void thread_B_start(core &c2) {
 
 void running_cores(PCB pcb)
 {
-    while (!pcb.cores.empty())
+    int iteration_count = 0;
+    while (!pcb.cores.empty() && iteration_count < 10)
     {
         if (pcb.cores.size() < 2) {
             cout << "Not enough cores to run." << endl;
@@ -111,6 +112,16 @@ void running_cores(PCB pcb)
             cout << "All cores have been processed." << endl;
             return;
         }
+
+        // Incrementar o contador de iterações e imprimir métricas
+        iteration_count++;
+        cout << "Iteration " << iteration_count << " completed." << endl;
+        cout << "Number of cores remaining: " << pcb.cores.size() << endl;
+        cout << "Number of zombie cores: " << pcb.zombies.size() << endl;
+    }
+
+    if (iteration_count >= 10) {
+        cout << "Maximum number of iterations reached. Stopping execution." << endl;
     }
 }
 

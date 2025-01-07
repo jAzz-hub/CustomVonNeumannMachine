@@ -46,10 +46,17 @@ core& core::running_asm(int quantum)
         }
         this->counter += 1;
         this->clock += 1;
-        break;
+
+        // Simular a condição de término do programa
+        if (this->counter % 100 == 0) {
+            this->endProgram = true;
+        }
+
         if(this->endProgram == true){
-            this->counterForEnd = -1;
-            this->zombie = true;
+            this->counterForEnd--;
+            if (this->counterForEnd == 0) {
+                this->zombie = true;
+            }
         }
 
         // Adicionar mensagem de depuração
