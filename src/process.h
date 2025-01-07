@@ -28,12 +28,18 @@ struct process{
     std::string state;
     int quantum;
     int id;
-    int mem_addr; // Added missing semicolon
+    int mem_addr;
 
     process(const std::string& input_program, int quantum, const std::string& state, int id, int mem_addr)
     : input_program(input_program), quantum(quantum), state(state), id(id), mem_addr(mem_addr)
     {
         this->timestamp = 0;
+        
+	//Gerando o id por casting com as 2 primeiras letras da string que dá nome ao programa de entrada
+        for (size_t i = 0; i < this->input_program.size() && i < 3; ++i) {
+            id = id * 100 + static_cast<int>(input_program[i]);
+            this->id = id;
+        }
     }
 
     process() = default;
@@ -47,4 +53,5 @@ struct process{
 };
 
 #endif
+
 

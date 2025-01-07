@@ -31,7 +31,7 @@ void thread_A_start(core &c1) {
         unique_lock<mutex> lock(mtx); // lock mutex
         cv.wait(lock, [] { return turnA; }); // wait until it's thread A's turn
 
-        cout << "Thread A is running process " << currentProcessIndex << endl;        
+        cout << "Thread A is running process " << c1.proc.id << endl;        
         c1.running_asm(c1.proc.quantum); // run the process
         cout << "Thread A is interrupted" << endl;
         
@@ -49,7 +49,7 @@ void thread_B_start(core &c2) {
         cv.wait(lock, [] { return !turnA; });
 
 
-        cout << "Thread B is running process " << currentProcessIndex << endl;
+        cout << "Thread B is running process " << c2.proc.id << endl;
         c2.running_asm(c2.proc.quantum);
         cout << "Thread B is interrupted" << endl;
 
@@ -81,13 +81,13 @@ void running_cores(PCB pcb)
         {
             if (pcb.cores[0].zombie == true)
             {
-                pcb.zombies.push_back(pcb.cores.front());
+                pcb.zombies.push_back(pcb.cores[0]);
                 pcb.cores.pop_front();
             }
             else
             {
                 // Move core to the end of the queue
-                pcb.cores.push_back(pcb.cores.front());
+                pcb.cores.push_back(pcb.cores[0]);
                 pcb.cores.pop_front();
             }
         }

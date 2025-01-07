@@ -13,7 +13,7 @@ PCB::PCB(const std::vector<std::string>& input_programs) {
             new_core.clock = 0;
             new_core.endProgram = false;
             new_core.data = Instruction_Data();
-            new_core.proc.quantum = 10;
+            new_core.proc.quantum = 2;
             new_core.proc.input_program = program;
             new_core.proc.state = "waiting";
             new_core.proc.id = id_counter++;

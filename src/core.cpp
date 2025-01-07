@@ -11,7 +11,6 @@ void core::setProcess(process &proc) {
 core& core::running_asm(int quantum)
 {
     bool stop_flag = this->proc.timestamp % quantum == 0; // false na primeira iteração 
-
     //roda a pipeline
     while(this->counterForEnd > 0 && !this->zombie)
     {
@@ -48,7 +47,7 @@ core& core::running_asm(int quantum)
         this->clock += 1;
 
         // Simular a condição de término do programa
-        if (this->counter % 100 == 0) {
+        if (this->counter % 100 == 0 || this-proc.timestamp % this->proc.quantum == 0) {
             this->endProgram = true;
         }
 
@@ -59,8 +58,6 @@ core& core::running_asm(int quantum)
             }
         }
 
-        // Adicionar mensagem de depuração
-        std::cout << "Core state: counterForEnd=" << this->counterForEnd << ", counter=" << this->counter << ", clock=" << this->clock << ", endProgram=" << this->endProgram << ", zombie=" << this->zombie << std::endl;
     }
     return *this;
 }
