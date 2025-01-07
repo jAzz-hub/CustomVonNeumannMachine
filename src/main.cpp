@@ -59,8 +59,13 @@ void thread_B_start(core &c2) {
 
 void running_cores(PCB pcb)
 {
-    while(true)
+    while (!pcb.cores.empty())
     {
+        if (pcb.cores.size() < 2) {
+            cout << "Not enough cores to run." << endl;
+            break;
+        }
+
         thread t1(thread_A_start, ref(pcb.cores[0]));
         thread t2(thread_B_start, ref(pcb.cores[1]));
 
@@ -99,25 +104,28 @@ void running_cores(PCB pcb)
 
         if (pcb.cores.empty())
         {
-	    false;
+            cout << "All cores have been processed." << endl;
             break;
         }
-    printf("aqui");
     }
 }
 
+using namespace std;
 int main(int argc, char* argv[]){
 
-    // if (argc != 2) {
-    // std::cerr << "Usage: " << argv[0] << " <input_file>" << std::endl;
-    // return 1;
-    // }
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <input_file1> <input_file2> ..." << std::endl;
+        return 1;
+    }
 
-    std::cout<<argv<<std::endl;
-    
     std::vector<std::string> input_programs(argv + 1, argv + argc);
 
     PCB pcb = PCB(input_programs);
+    for (const auto& program : input_programs) {
+        std::cout << program << std::endl;
+    }
+    return 0;
+
 
     running_cores(pcb);
 
@@ -151,4 +159,5 @@ int main(int argc, char* argv[]){
     return 0;
 
 }
+
 
