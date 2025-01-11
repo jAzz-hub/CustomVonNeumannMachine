@@ -26,7 +26,7 @@ size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
 
 
-void thread_A_start(core &c1) {
+void thread_A_start(core &c1, PCB pcb) {
     while (true) { // loop infinito
         unique_lock<mutex> lock(mtx); // lock mutex
         cv.wait(lock, [] { return turnA; }); // wait until it's thread A's turn
@@ -37,8 +37,8 @@ void thread_A_start(core &c1) {
         
         turnA = false;
         cv.notify_all();
-
-        if (c1.zombie) break;
+        if (c1.stop_flag == true || c1.zombie == true)
+            break;
     }
 }
 
@@ -56,8 +56,8 @@ void thread_B_start(core &c2) {
         // Move the process to the end of the queue
         turnA = true;
         cv.notify_all();
-
-        if (c2.zombie) break;
+        if (c2.stop_flag == true || c2.zombie == true)
+            break;
     }
 }
 
@@ -71,7 +71,7 @@ void running_cores(PCB pcb)
             return;
         }
 
-        thread t1(thread_A_start, ref(pcb.cores[0]));
+        thread t1(thread_A_start, ref(pcb.cores[0]), pcb);
         thread t2(thread_B_start, ref(pcb.cores[1]));
 
         t1.join();
@@ -128,6 +128,7 @@ void running_cores(PCB pcb)
 using namespace std;
 int main(int argc, char* argv[]){
 
+    //Printar os dois nomes dos programas caso haja menos de 1 entrada
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <input_file1> <input_file2> ..." << std::endl;
         return 1;
