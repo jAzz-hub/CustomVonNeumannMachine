@@ -25,8 +25,7 @@ bool turnA = true;
 size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
 
-
-void thread_A_start(core &c1, PCB pcb) {
+void thread_A_start(core &c1, PCB &pcb) {
     while (true) { // loop infinito
         unique_lock<mutex> lock(mtx); // lock mutex
         cv.wait(lock, [] { return turnA; }); // wait until it's thread A's turn
@@ -37,13 +36,16 @@ void thread_A_start(core &c1, PCB pcb) {
         
         turnA = false;
         cv.notify_all();
-        if (c1.stop_flag == true || c1.zombie == true)
+        if(c1.stop_flag == true || c1.zombie == true)
+        {
+            pcb.ZombieCheck();
             break;
+        }
     }
 }
 
 
-void thread_B_start(core &c2) {
+void thread_B_start(core &c2, PCB &pcb) {
     while (true) {
         unique_lock<mutex> lock(mtx);
         cv.wait(lock, [] { return !turnA; });
@@ -57,7 +59,10 @@ void thread_B_start(core &c2) {
         turnA = true;
         cv.notify_all();
         if (c2.stop_flag == true || c2.zombie == true)
+        {
+            pcb.ZombieCheck();
             break;
+        }
     }
 }
 
@@ -71,47 +76,47 @@ void running_cores(PCB pcb)
             return;
         }
 
-        thread t1(thread_A_start, ref(pcb.cores[0]), pcb);
-        thread t2(thread_B_start, ref(pcb.cores[1]));
+        thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb));
+        thread t2(thread_B_start, ref(pcb.cores[1]), ref(pcb));
 
         t1.join();
         t2.join();
 
-        if (pcb.cores[0].stop_flag == true)
-        {
-            if (pcb.cores[0].zombie == true)
-            {
-                pcb.zombies.push_back(pcb.cores[0]);
-                pcb.cores.pop_front();
-            }
-            else
-            {
-                // Move core to the end of the queue
-                pcb.cores.push_back(pcb.cores[0]);
-                pcb.cores.pop_front();
-            }
-        }
+        // if (pcb.cores[0].stop_flag == true)
+        // {
+        //     if (pcb.cores[0].zombie == true)
+        //     {
+        //         pcb.zombies.push_back(pcb.cores[0]);
+        //         pcb.cores.pop_front();
+        //     }
+        //     else
+        //     {
+        //         // Move core to the end of the queue
+        //         pcb.cores.push_back(pcb.cores[0]);
+        //         pcb.cores.pop_front();
+        //     }
+        // }
 
-        if (pcb.cores[1].stop_flag == true)
-        {   
-            if (pcb.cores[1].zombie == true)
-            {
-                pcb.zombies.push_back(pcb.cores[1]);
-                pcb.cores.erase(pcb.cores.begin() + 1);
-            }
-            else
-            {
-                // Move core to the end of the queue
-                pcb.cores.push_back(pcb.cores[1]);
-                pcb.cores.erase(pcb.cores.begin() + 1);
-            }
-        }
+        // if (pcb.cores[1].stop_flag == true)
+        // {   
+        //     if (pcb.cores[1].zombie == true)
+        //     {
+        //         pcb.zombies.push_back(pcb.cores[1]);
+        //         pcb.cores.erase(pcb.cores.begin() + 1);
+        //     }
+        //     else
+        //     {
+        //         // Move core to the end of the queue
+        //         pcb.cores.push_back(pcb.cores[1]);
+        //         pcb.cores.erase(pcb.cores.begin() + 1);
+        //     }
+        // }
 
-        if (pcb.cores.empty())
-        {
-            cout << "All cores have been processed." << endl;
-            return;
-        }
+        // if (pcb.cores.empty())
+        // {
+        //     cout << "All cores have been processed." << endl;
+        //     return;
+        // }
 
         // Incrementar o contador de iterações e imprimir métricas
         iteration_count++;

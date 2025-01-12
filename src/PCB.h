@@ -10,6 +10,7 @@ struct PCB {
     std::deque<core> zombies;
 
     PCB(const std::vector<std::string>& input_programs);
+    void ZombieCheck();
 };
 
 #endif

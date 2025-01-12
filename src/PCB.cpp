@@ -13,7 +13,7 @@ PCB::PCB(const std::vector<std::string>& input_programs) {
             new_core.clock = 0;
             new_core.endProgram = false;
             new_core.data = Instruction_Data();
-            new_core.proc.quantum = 2;
+            new_core.proc.quantum = 20;
             new_core.proc.input_program = program;
             new_core.proc.state = "waiting";
             new_core.proc.id = id_counter++;
@@ -23,3 +23,40 @@ PCB::PCB(const std::vector<std::string>& input_programs) {
     }
 }
 
+void PCB::ZombieCheck(){
+    if (this->cores[0].stop_flag == true)
+    {
+        if (this->cores[0].zombie == true)
+        {
+            this->zombies.push_back(this->cores[0]);
+            this->cores.pop_front();
+        }
+        else
+        {
+            // Move core to the end of the queue
+            this->cores.push_back(this->cores[0]);
+            this->cores.pop_front();
+        }
+    }
+
+    if (this->cores[1].stop_flag == true)
+    {   
+        if (this->cores[1].zombie == true)
+        {
+            this->zombies.push_back(this->cores[1]);
+            this->cores.erase(this->cores.begin() + 1);
+        }
+        else
+        {
+            // Move core to the end of the queue
+            this->cores.push_back(this->cores[1]);
+            this->cores.erase(this->cores.begin() + 1);
+        }
+    }
+
+    if (this->cores.empty())
+    {
+        cout << "All cores have been processed." << endl;
+        return;
+    }
+}

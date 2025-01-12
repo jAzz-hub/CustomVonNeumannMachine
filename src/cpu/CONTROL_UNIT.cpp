@@ -39,12 +39,12 @@ void Control_Unit::Fetch(REGISTER_BANK &registers, bool &endProgram, MainMemory 
 void Control_Unit::Decode(REGISTER_BANK &registers, Instruction_Data &data){
 
     const uint32_t instruction = registers.ir.read();
-    cout<<"Até 1"<<endl;
+    // cout<<"Até 1"<<endl;
     data.op = Identificacao_instrucao(instruction,registers);
     //cout << data.op << endl;
 
     //cout <<instruction << endl;
-    cout<<"Até 2"<<endl;
+    // cout<<"Até 2"<<endl;
     if(data.op == "ADD" || data.op == "SUB" || data.op == "MULT" || data.op == "DIV"){
         // se entrar aqui é porque tem de carregar registradores, que estão especificados na instrução
         data.source_register = Get_source_Register(instruction);
