@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <thread>
 #include <mutex>
@@ -10,7 +9,6 @@
 #include "./core.h"
 #include "./process.h"
 #include "./PCB.h"
-using namespace std;
 
 
 // Processo é criado
@@ -35,10 +33,11 @@ void thread_A_start(core &c1, PCB &pcb) {
         cout << "Thread A is interrupted" << endl;
         
         turnA = false;
+        c1.proc.set_state("waiting");
         cv.notify_all();
         if(c1.stop_flag == true || c1.zombie == true)
         {
-            pcb.ZombieCheck();
+            pcb.zombie_check();
             break;
         }
     }
@@ -60,7 +59,7 @@ void thread_B_start(core &c2, PCB &pcb) {
         cv.notify_all();
         if (c2.stop_flag == true || c2.zombie == true)
         {
-            pcb.ZombieCheck();
+            pcb.zombie_check();
             break;
         }
     }
@@ -73,6 +72,10 @@ void running_cores(PCB pcb)
     {
         if (pcb.cores.size() < 2) {
             cout << "Not enough cores to run." << endl;
+            cout<<endl<<endl<<endl<<"ZOMBIES INFO:"<<endl;
+            pcb.zombies_info();
+            cout<<endl<<endl<<endl<<"CORES INFO:"<<endl;
+            pcb.cores_info();
             return;
         }
 
@@ -81,42 +84,6 @@ void running_cores(PCB pcb)
 
         t1.join();
         t2.join();
-
-        // if (pcb.cores[0].stop_flag == true)
-        // {
-        //     if (pcb.cores[0].zombie == true)
-        //     {
-        //         pcb.zombies.push_back(pcb.cores[0]);
-        //         pcb.cores.pop_front();
-        //     }
-        //     else
-        //     {
-        //         // Move core to the end of the queue
-        //         pcb.cores.push_back(pcb.cores[0]);
-        //         pcb.cores.pop_front();
-        //     }
-        // }
-
-        // if (pcb.cores[1].stop_flag == true)
-        // {   
-        //     if (pcb.cores[1].zombie == true)
-        //     {
-        //         pcb.zombies.push_back(pcb.cores[1]);
-        //         pcb.cores.erase(pcb.cores.begin() + 1);
-        //     }
-        //     else
-        //     {
-        //         // Move core to the end of the queue
-        //         pcb.cores.push_back(pcb.cores[1]);
-        //         pcb.cores.erase(pcb.cores.begin() + 1);
-        //     }
-        // }
-
-        // if (pcb.cores.empty())
-        // {
-        //     cout << "All cores have been processed." << endl;
-        //     return;
-        // }
 
         // Incrementar o contador de iterações e imprimir métricas
         iteration_count++;

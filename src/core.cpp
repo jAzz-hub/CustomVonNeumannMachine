@@ -10,6 +10,7 @@ void core::setProcess(process &proc) {
 
 core& core::running_asm(int quantum)
 {
+    this->proc.state = "running";
     int quantum_reference = 0;
     bool stop_flag = false; //= ((this->clock%this->proc.quantum == 0) && (this->clock!=0)) && (this->proc.timestamp!=0); // false na primeira iteração 
     //roda a pipeline

@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <string>
+#include <random>
 #include"./cpu/REGISTER_BANK.h"
 #include"./cpu/CONTROL_UNIT.h"
 #include"./memory/MAINMEMORY.h"
@@ -23,9 +24,23 @@ using namespace std;
 
 struct process{
 
+    enum STATE {
+        running,
+        waiting,
+        stopped,
+    };
+
+    enum PRIORITY
+    {
+        high,
+        medium,
+        low,
+    };
+
     std::string input_program;
     int timestamp = 0;
     std::string state;
+    std::string priority;
     int quantum;
     int id;
     int mem_addr;
@@ -47,9 +62,9 @@ struct process{
     process& operator=(const process&) = default;
     process(process&&) noexcept = default;
     process& operator=(process&&) noexcept = default;
-    
     void print_attributes() const;
-
+    void set_state(const std::string& state);    
+    void initialize_priorities();
 };
 
 #endif
