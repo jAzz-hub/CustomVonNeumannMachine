@@ -42,6 +42,7 @@ struct process{
     std::string state;
     std::string priority;
     int quantum;
+    int burst_time;
     int id;
     int mem_addr;
 

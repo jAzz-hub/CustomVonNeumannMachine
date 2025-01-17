@@ -6,6 +6,7 @@
 #define REGISTER_H
 
 #include <cinttypes>
+#include <string.h>
 
 struct REGISTER {
     uint32_t value;

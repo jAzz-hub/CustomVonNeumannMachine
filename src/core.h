@@ -43,7 +43,7 @@ struct core {
     core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0) {}
 
     void start();
-    core& running_asm(int quantum);
+    core& running_asm(string scheduller);
     void execute();
     void setProcess(process &proc);
 

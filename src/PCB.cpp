@@ -1,7 +1,10 @@
 #include "PCB.h"
 
-PCB::PCB(const std::vector<std::string>& input_programs) {
+
+
+PCB::PCB(const vector<string>& input_programs, string scheduller) {
     int id_counter = 0;
+    this->scheduller = scheduller;
     for (const auto& program : input_programs) {
         if (cores.size() < 10) {
             core new_core;
@@ -13,7 +16,7 @@ PCB::PCB(const std::vector<std::string>& input_programs) {
             new_core.clock = 0;
             new_core.endProgram = false;
             new_core.data = Instruction_Data();
-            new_core.proc.quantum = 20;
+            chrono_initializer(&new_core, program);
             new_core.proc.input_program = program;
             new_core.proc.state = "waiting";
             new_core.proc.id = id_counter++;
@@ -79,6 +82,7 @@ void PCB::zombies_info()
 {
     for (const auto& zombie : zombies) {
         cout << "Quantum: " << zombie.proc.quantum << endl;
+        cout<< "Burst Time: " << zombie.proc.burst_time << endl;
         cout << "Timestamp: " << zombie.proc.timestamp << endl;
         cout << "Program Name: " << zombie.proc.input_program << endl;
         cout << "End Program: " << zombie.endProgram << endl;
@@ -93,12 +97,102 @@ void PCB::cores_info()
 {
     for (const auto& core : cores) {
         cout << "Quantum: " << core.proc.quantum << endl;
+        cout<< "Burst Time: " << core.proc.burst_time << endl;
         cout << "Timestamp: " << core.proc.timestamp << endl;
         cout << "Program Name: " << core.proc.input_program << endl;
         cout << "End Program: " << core.endProgram << endl;
         cout << "Zombie: " << core.zombie << endl;
         cout << "Clock: " << core.clock << endl;
         cout << "Counter: " << core.counter << endl;
+        cout<< "stop_condition" << core.stop_flag <<endl;
         cout << "-------------------------" << endl;
     }
+}
+
+void PCB::chrono_initializer( core *new_core, string program)
+{
+    if (this->scheduller == "SJF")
+    {
+        new_core->proc.burst_time = burster(program); // Faz com que cada input_program tenha um burst time diferente
+    }
+    else if (this->scheduller == "RR")
+    {
+        new_core->proc.quantum = 20; // Quantum de 20ms para todos os processos
+    }
+    else if(this->scheduller == "FCFS")
+    {
+        new_core->proc.quantum = 100; // Processa os processos até eles terminarem
+    }
+}
+
+
+int PCB::burster(string program)
+{
+    if (program == "outputs2/exout.bin")
+    {
+        return 23;
+    }
+    else if(program == "outputs2/outex.bin")
+    {
+        return 23;
+    }
+    else if(program == "outputs2/outextwo.bin")
+    {
+        return 23;
+    }
+    else if(program == "outputs2/outioop.bin")
+    {
+        return 16;
+    }
+    else if(program == "outputs2/outmultanddivide.bin")
+    {
+        return 20;
+    }
+    else if(program == "outputs2/outmultanddividetwo.bin")
+    {
+        return 20;
+    }
+    else if(program == "outputs2/outsumdec.bin")
+    {
+        return 20;
+    }
+    else if(program == "outputs2/outsumdeccesar.bin")
+    {
+        return 20;
+    }
+    else if(program == "outputs2/outsumsub.bin")
+    {
+        return 20;
+    }
+    else if(program == "outputs2/nopout.bin")
+    {
+        return 20;
+    } 
+    //sorteia um número entre 15 e 40
+    else
+    {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<> dis(15, 40);
+        return dis(gen);
+    }
+
+}
+
+//ordena os cores de acordo com seu valor de burst time
+void PCB::sorting_cores()
+{
+    sort(cores.begin(), cores.end(), [](core a, core b) {
+        return a.proc.burst_time < b.proc.burst_time;
+    });
+}
+
+bool PCB::SJF()
+{
+    return this->scheduller == "SJF";
+}
+
+bool PCB::RR()
+{
+    return this->scheduller == "RR";
 }
