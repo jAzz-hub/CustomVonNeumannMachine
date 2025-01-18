@@ -293,7 +293,7 @@ blt $t0 $t3 loop
     <table border="1">
       <tr><td><u>cmake CMakeLists.txt</u></td> <td>Apaga a última compilação realizada contida na pasta build</td></tr>
       <tr><td><u>make</u></td> <td>Executa a compilação do programa utilizando o gcc, e o resultado vai para a pasta build.</td></tr>
-      <tr><td><u>./CustomVonNeumannMachine outputs/outextwo.bin outputs/outsomacesar.bin outputs/outputex.bin </u></td> <td>Executa com programas da pasta de asm's que já rodaram no assembler processados </td></tr>
+      <tr><td><u>./CustomVonNeumannMachine outputs2/outsumdec.bin outputs2/outsumdeccesar.bin outputs2/outmultanddivide.bin outputs2/outex.bin output2/outioop.bin FCFS </u></td> <td>Executa com programas da pasta de asm's que já rodaram no assembler processados </td></tr>
     </table>
 </p>
 
