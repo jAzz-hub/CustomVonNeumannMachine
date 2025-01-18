@@ -1,8 +1,5 @@
 cmake-build-debug/
 .idea
-Makefile
 CustomVonNeumannMachine
 Assembler
-cmake_install.cmake
-
 build/
