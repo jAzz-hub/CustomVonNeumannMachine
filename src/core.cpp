@@ -83,13 +83,7 @@ core& core::running_asm(string scheduller)
             this->counterForEnd -= 1;
             this->stop_flag = true;
             return *this;
-        }
-        // Simular a condição de término do programa
-        // if (this->counter % 100 == 0 || this-proc.timestamp % reference_of_time == 0) {
-        //     this->endProgram = true;
-        // }
-        
-
+        }        
     }
     return *this;
 }

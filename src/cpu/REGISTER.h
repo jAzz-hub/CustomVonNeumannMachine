@@ -5,8 +5,16 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <vector>
+#include <bitset>
 #include <cinttypes>
-#include <string.h>
+#include <unistd.h>
 
 struct REGISTER {
     uint32_t value;

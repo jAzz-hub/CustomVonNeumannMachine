@@ -11,7 +11,6 @@
     [ ] - Cache loading intead of memory loading.
     [ ] - Cache management with LRU.
     [ ] - Cache and memory intercalation.
-    
 ### Completed
 - [x] Core instantiation following the draws.
 - [x] Pipeline implemented as core method.

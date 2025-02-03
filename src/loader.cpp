@@ -1,10 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <bitset>
+
 
 #include"./memory/MAINMEMORY.h"
 
@@ -60,9 +54,6 @@ void loadProgram(const std::string& inputFile, MainMemory & ram) {
                     int intValue = std::stoi(value);
                     ram.WriteMem(address,intValue);
 
-                    //std::cout << "Variable: " << padName(variableName) 
-                    //          << " Address: " << address 
-                    //          << " Value: " << intValue << std::endl;
                     address += 1; 
                 }
             }
@@ -122,8 +113,4 @@ void loadProgram(const std::string& inputFile, MainMemory & ram) {
         memAddress++;
     }
 
-    // Output the loaded memory for verification
-    //for (size_t i = 0; i < address; ++i) {
-    //    std::cout << "Address " << (i) << ": " << std::bitset<32>(ram.ReadMem(i)) << std::endl;
-    //}
 }

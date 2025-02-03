@@ -147,7 +147,6 @@ int main(int argc, char* argv[]){
     running_cores(pcb);
 
     return 0;
-
 }
 
 
