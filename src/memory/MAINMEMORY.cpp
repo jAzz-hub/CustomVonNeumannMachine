@@ -16,6 +16,7 @@ bool MainMemory::EmptyLine(int i) const
 
 void MainMemory::InsertData(const uint32_t data, int iTarget, int jTarget)
 {
+        sleep(2);
         bool hA = iTarget<NumOfi && jTarget<NumOfj;
         bool hB = iTarget>=0 && jTarget>=0;
 

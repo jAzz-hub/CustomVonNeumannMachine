@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <list>
+#include <unordered_map>
 #include "../cpu/REGISTER.h"
 
 struct MemoryCell

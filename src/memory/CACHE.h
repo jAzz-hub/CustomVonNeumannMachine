@@ -1,19 +1,25 @@
-#ifndef MAINMEMORY_H
-#define MAINMEMORY_H
+#ifndef CACHE_H
+#define CACHE_H
+
 
 #include "MEMORYCELL.h"
 #include "stdbool.h"
 
 using namespace std;
 
-struct MainMemory{
+struct Cache{
 	int NumOfj;
 	int NumOfi;
 	MemoryCell **words;
 
-	MainMemory() : NumOfj(8048), NumOfi(8048), words(NULL) {}
+	list<pair <int, int>> LRU;
+	unordered_map<int, list<pair<int, int>>::iterator> cache_map;
+	
+	Cache() : NumOfj(2048), NumOfi(2048), words(NULL) {}
 
-	MainMemory(int NumOfj, int NumOfi) {
+
+
+	Cache(int NumOfj, int NumOfi) {
 
 		this->NumOfi = NumOfi;
 		this->NumOfj = NumOfj;
