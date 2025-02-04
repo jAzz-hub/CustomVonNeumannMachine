@@ -164,7 +164,7 @@ void loadProgramInCache(const std::string& inputFile, Cache & mem) {
                     }
                     // Convert the value to int and store it in memory
                     int intValue = std::stoi(value);
-                    ram.WriteMem(address,intValue);
+                    mem.WriteMem(address,intValue);
 
                     address += 1; 
                 }
@@ -223,7 +223,7 @@ void loadProgramInCache(const std::string& inputFile, Cache & mem) {
 
         // Convert instruction string to binary and store in memory
         try {
-            ram.WriteMem(memAddress, std::stoul(instruction, nullptr, 2));
+            mem.WriteMem(memAddress, std::stoul(instruction, nullptr, 2));
         } catch (const std::exception& e) {
             std::cerr << "Conversion error at: " << instruction << std::endl;
         }
