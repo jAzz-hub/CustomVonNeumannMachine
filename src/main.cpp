@@ -22,6 +22,7 @@ condition_variable cv;
 bool turnA = true;
 size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
+bool cache = false;
 
 void thread_A_start(core &c1, PCB &pcb) {
     while (true)
@@ -128,7 +129,7 @@ int main(int argc, char* argv[]){
     //Criar um vetor de strings com os nomes dos programas tirando o último elemento
     std::vector<std::string> input_programs(argv + 1, argv + argc - 1);
 
-    PCB pcb = PCB(input_programs, argv[argc-1]);
+    PCB pcb = PCB(input_programs, argv[argc-1], cache);
 
     pcb.cores.pop_back();
 

@@ -1,14 +1,13 @@
 #include "PCB.h"
 
 
-
-PCB::PCB(const vector<string>& input_programs, string scheduller) {
+PCB::PCB(const vector<string>& input_programs, string scheduller, bool cache) {
     int id_counter = 0;
     this->scheduller = scheduller;
     for (const auto& program : input_programs) {
         if (cores.size() < 10) {
             core new_core;
-            new_core.ram = MainMemory(2048, 2048);
+            MainMemory memory(2048, 2048);
             new_core.registers = REGISTER_BANK();
             new_core.UC = Control_Unit();
             new_core.counterForEnd = 5;

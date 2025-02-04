@@ -2,6 +2,7 @@
 #define MAINMEMORY_H
 
 #include "MEMORYCELL.h"
+#include "CACHE.h"
 #include "stdbool.h"
 
 using namespace std;

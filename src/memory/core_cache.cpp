@@ -1,38 +1,14 @@
-#include "core.h"
+#include "core_cache_cache.h"
 
-core::core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem)
-{    
-    this->cache = cache;
-    MainMemory ram = MainMemory(2048,2048);
-    if(!this->cache)
-    {    
-        this->cache_mem = Cache(2048, 2048, memory);
-    }
-
-    this->registers = REGISTER_BANK();
-    this->UC = Control_Unit();
-    this->counterForEnd = 5;
-    this->counter = 0;
-    this->clock = 0;
-    this->endProgram = false;
-    this->data = Instruction_Data();
-    this->proc = process();
-    this->cache = false;
-    this->ram = MainMemory(2048, 2048);
+void core_cache::start() {
+    loadProgram(this->proc.input_program, this->ram);
 }
 
-void core::start() {
-    if(this->cache == true)
-        loadProgramInCache(this->proc.input_program, this->cache_mem);
-    else
-        loadProgramInRam(this->proc.input_program, this->ram);
-}
-
-void core::setProcess(process &proc) {
+void core_cache::setProcess(process &proc) {
     this->proc = proc;
 }
 
-core& core::running_asm(string scheduller)
+core_cache& core_cache::running_asm(string scheduller)
 {
     int reference_of_time; 
     if (scheduller == "RR" || scheduller == "FCFS")
@@ -111,3 +87,4 @@ core& core::running_asm(string scheduller)
     }
     return *this;
 }
+

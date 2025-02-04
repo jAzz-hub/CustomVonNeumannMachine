@@ -9,8 +9,8 @@
 // 	criada na main
 // 	2.2 
 
-#ifndef CORE_H
-#define CORE_H
+#ifndef CORE_CACHE_H
+#define CORE_CACHE_H
 
 #include <iostream>
 #include "memory/CACHE.h"
@@ -21,9 +21,8 @@
 
 using namespace std;
 
-struct core {
+struct core_cache {
     MainMemory ram = MainMemory(2048,2048);				//  1º  Cria-se uma variável do tipo MainMemory com 2048 linhas e 2048 colunas.
-    Cache cache_mem = Cache(2048, 2048, ram);
     REGISTER_BANK registers;
     Control_Unit UC;
     int counterForEnd = 5;
@@ -34,26 +33,23 @@ struct core {
     bool stop_flag = false;
     Instruction_Data data;
     process proc; // Renamed to avoid conflict
-    bool cache;
 
-    // core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem)
-    //     : ram(memory), registers(registers), UC(uc), counterForEnd(cForEnd), counter(counter), clock(clock), endProgram(endP), data(instruction_D), proc(proc), cache(cache), cache_mem(cache_mem)
-    // {
-    // }
+    core_cache(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc)
+        : ram(memory), registers(registers), UC(uc), counterForEnd(cForEnd), counter(counter), clock(clock), endProgram(endP), data(instruction_D), proc(proc)
+    {
+    }
 
-    core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0), cache(false), cache_mem(Cache(2048,2048, ram)){}
-
-    core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem);
+    core_cache() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0) {}
 
     void start();
-    core& running_asm(string scheduller);
+    core_cache& running_asm(string scheduller);
     void execute();
     void setProcess(process &proc);
 
-    core(const core&) = default;
-    core& operator=(const core&) = default;
-    core(core&&) noexcept = default;
-    core& operator=(core&&) noexcept = default;
+    core_cache(const core_cache&) = default;
+    core_cache& operator=(const core_cache&) = default;
+    core_cache(core_cache&&) noexcept = default;
+    core_cache& operator=(core_cache&&) noexcept = default;
 };
 #endif
 

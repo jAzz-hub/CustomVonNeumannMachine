@@ -6,12 +6,19 @@
 #include "core.h"
 
 
+// Salva todos os processos na memória
+// Roda todos no loader 1 de cada vez
+//
+// monta a fila de prontos
+// 
+// 
+
 struct PCB {
     std::deque<core> cores;
     std::deque<core> zombies;
     string scheduller;
 
-    PCB(const std::vector<std::string>& input_programs, string scheduller);
+    PCB(const std::vector<std::string>& input_programs, string scheduller,bool cache);
     void zombie_check();
     void zombies_info();
     void cores_info();
