@@ -3,3 +3,6 @@ cmake-build-debug/
 CustomVonNeumannMachine
 Assembler
 build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
