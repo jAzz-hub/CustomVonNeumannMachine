@@ -1,38 +1,38 @@
 #include "core.h"
 
-core::core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem)
-{    
-    this->cache = cache;
-    MainMemory ram = MainMemory(2048,2048);
-    if(!this->cache)
-    {    
-        this->cache_mem = Cache(2048, 2048, memory);
-    }
-
-    this->registers = REGISTER_BANK();
-    this->UC = Control_Unit();
-    this->counterForEnd = 5;
-    this->counter = 0;
-    this->clock = 0;
-    this->endProgram = false;
-    this->data = Instruction_Data();
-    this->proc = process();
-    this->cache = false;
-    this->ram = MainMemory(2048, 2048);
-}
+// core::core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem)
+// {    
+//     this->cache = cache;
+//     this->registers = REGISTER_BANK();
+//     this->UC = Control_Unit();
+//     this->counterForEnd = 5;
+//     this->counter = 0;
+//     this->clock = 0;
+//     this->endProgram = false;
+//     this->data = Instruction_Data();
+//     this->proc = process();
+//     this->cache = false;
+//     this->ram = MainMemory(2048, 2048);
+//     this->instructions = std::vector<std::string>();
+// }
 
 void core::start() {
-    if(this->cache == true)
-        loadProgramInCache(this->proc.input_program, this->cache_mem);
-    else
-        loadProgramInRam(this->proc.input_program, this->ram);
+        loadProgramInRam(this->proc.input_program, this->ram, &this->core_instructions);
+        
+        // iterar sobre core_instructions
+        for (auto instruction : this->core_instructions) {
+            std::cout << instruction << std::endl;
+        }
+        cout<<endl;
+        cout<<endl;
 }
+
 
 void core::setProcess(process &proc) {
     this->proc = proc;
 }
 
-core& core::running_asm(string scheduller)
+core& core::running_asm(string scheduller, int similarity_caching_time)
 {
     int reference_of_time; 
     if (scheduller == "RR" || scheduller == "FCFS")
@@ -46,7 +46,6 @@ core& core::running_asm(string scheduller)
     else
     {
         cout << "Invalid scheduller" << endl;
-        exit(1);
     }
     
     this->proc.state = "running";
@@ -60,22 +59,27 @@ core& core::running_asm(string scheduller)
         {       
             if(this->counter >= 4 && this->counterForEnd >= 1){
                 //chamar a instrução de write back
+                usleep(similarity_caching_time);
                 stop_flag = (quantum_reference%reference_of_time == 0) && (quantum_reference!=0);
                 this->UC.Write_Back(this->UC.data[ this->counter - 4 ], this->ram, this->registers);
             }
             if(this->counter >= 3 && this->counterForEnd >= 2){
+                usleep(similarity_caching_time/2);
                 //chamar a instrução de memory_acess da unidade de controle
                 stop_flag = (quantum_reference%reference_of_time == 0) && (quantum_reference!=0);
                 this->UC.Memory_Acess(this->registers, this->UC.data[ this->counter - 3 ], this->ram);
             }
 
             if(this->counter >= 2 && this->counterForEnd >= 3){
+                usleep((similarity_caching_time/5)- 100);
                 //chamar a instrução de execução da unidade de controle
                 stop_flag = (quantum_reference%reference_of_time == 0) && (quantum_reference!=0);
                 this->UC.Execute(this->registers,this->UC.data[ this->counter - 2 ], this->counter, this->counterForEnd, this->endProgram, this->ram);
             }
 
             if(this->counter >= 1 && this->counterForEnd >= 4){
+                
+                usleep(similarity_caching_time/3);
                 //chamar a instrução de decode da unidade de controle
                 stop_flag = (quantum_reference%reference_of_time == 0) && (quantum_reference!=0);
                 this->UC.Decode(this->registers, this->UC.data[ this->counter-1 ]);
@@ -86,6 +90,7 @@ core& core::running_asm(string scheduller)
             //Resultado? Segmentation fault
             
             if(this->counter >= 0 && this->counterForEnd == 5){
+                usleep(similarity_caching_time/2);
                 //chamar a instrução de fetch da unidade de controle
                 stop_flag = (quantum_reference%reference_of_time == 0) && (quantum_reference!=0);
                 this->UC.data.push_back(this->data) ;

@@ -8,7 +8,7 @@ uint32_t Cache::read(uint32_t address){
         return cache_map[address]->second; // Retorna o dado da cache
     } else {
         // Cache miss: carrega o dado da memória principal
-        uint32_t data = main_memory.ReadMem(address);
+        uint32_t data = this->aux_ram.ReadMem(address);
 
         // Se a cache estiver cheia, remove o LRU
         if(lru_list.size() >= size) {
@@ -44,7 +44,7 @@ void Cache::write(uint32_t address, uint32_t data) {
     }
 
     // Escreve o dado na memória principal (write-through)
-    main_memory.WriteMem(address, data);
+    this->aux_ram.WriteMem(address, data);
 }
 
 // bool Cache::EmptyLine(int i) const
@@ -84,25 +84,26 @@ void Cache::write(uint32_t address, uint32_t data) {
 // }
 
 
-// void Cache::WriteMem(const uint32_t address, const uint32_t data) {
-//     sleep(3);
-//     if (address >= NumOfi * NumOfj) {
-//         printf("Endereço inválido!\n");
-//         return;
-//     }
-//     int iTarget = address / NumOfj; 
-//     int jTarget = address % NumOfj; 
-//     words[iTarget][jTarget].write(data);
-// }
+void Cache::WriteMem(const uint32_t address, const uint32_t data)
+{
+    sleep(500);
+    if (address >= NumOfi * NumOfj) {
+        printf("Endereço inválido!\n");
+        return;
+    }
+    int iTarget = address / NumOfj; 
+    int jTarget = address % NumOfj; 
+    words[iTarget][jTarget].write(data);
+}
 
-// const uint32_t Cache::ReadMem(const uint32_t address) {
-//     sleep(3);
-//     if (address >= NumOfi * NumOfj) {
-//         printf("Endereço inválido!\n");
-//         return -1; 
-//     }
-//     int iTarget = address / NumOfj; 
-//     int jTarget = address % NumOfj; 
+const uint32_t Cache::ReadMem(const uint32_t address) {
+    sleep(500);
+    if (address >= NumOfi * NumOfj) {
+        printf("Endereço inválido!\n");
+        return -1; 
+    }
+    int iTarget = address / NumOfj; 
+    int jTarget = address % NumOfj; 
     
-//     return words[iTarget][jTarget].read();
-// }
+    return words[iTarget][jTarget].read();
+}

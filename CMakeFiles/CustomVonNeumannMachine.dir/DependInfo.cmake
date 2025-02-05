@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/jeje/clones/CustomVonNeumannMachine/src/cpu/REGISTER_BANK.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/REGISTER_BANK.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/cpu/REGISTER_BANK.cpp.o.d"
   "/home/jeje/clones/CustomVonNeumannMachine/src/loader.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/loader.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/loader.cpp.o.d"
   "/home/jeje/clones/CustomVonNeumannMachine/src/main.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o.d"
+  "/home/jeje/clones/CustomVonNeumannMachine/src/memory/CACHE.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o.d"
   "/home/jeje/clones/CustomVonNeumannMachine/src/memory/MAINMEMORY.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MAINMEMORY.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MAINMEMORY.cpp.o.d"
   "/home/jeje/clones/CustomVonNeumannMachine/src/memory/MEMORYCELL.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MEMORYCELL.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MEMORYCELL.cpp.o.d"
   "/home/jeje/clones/CustomVonNeumannMachine/src/memory/SECONDARY_MEMORY.cpp" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/SECONDARY_MEMORY.cpp.o" "gcc" "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/SECONDARY_MEMORY.cpp.o.d"

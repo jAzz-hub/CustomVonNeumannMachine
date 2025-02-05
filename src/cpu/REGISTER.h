@@ -4,9 +4,9 @@
 
 #ifndef REGISTER_H
 #define REGISTER_H
-
-
+#include <time.h>
 #include <iostream>
+#include <unistd.h>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -15,6 +15,11 @@
 #include <bitset>
 #include <cinttypes>
 #include <unistd.h>
+#include <time.h>
+#include <stdio.h> 
+using namespace std;
+
+ 
 
 struct REGISTER {
     uint32_t value;

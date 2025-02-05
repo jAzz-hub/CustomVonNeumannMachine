@@ -294,8 +294,13 @@ blt $t0 $t3 loop
       <tr><td><u>cmake CMakeLists.txt</u></td> <td>Apaga a última compilação realizada contida na pasta build</td></tr>
       <tr><td><u>make</u></td> <td>Executa a compilação do programa utilizando o gcc, e o resultado vai para a pasta build.</td></tr>
       <tr><td><u>./CustomVonNeumannMachine outputs2/outsumdec.bin outputs2/outsumdeccesar.bin outputs2/outmultanddivide.bin outputs2/outex.bin output2/outioop.bin FCFS </u></td> <td>Executa com programas da pasta de asm's que já rodaram no assembler processados </td></tr>
+      <tr><td><u>Modifique a variavel <code>bool cache</code> na linha 16 do arquivo <code>main.cpp</code> para conseguir rodar o programa com ou sem caching</u></td> <td>Testando o programa com ou sem caching </td></tr>
     </table>
 </p>
+
+Para ter caching no programa de modo que ele possa usufruir da política de reaproveitamento de dados, basta manter `bool cache = true;`, caso queira desativar o caching edite a linha de código para `bool cache= false;`
+![alt text](image.png)
+
 
 # Autores
 

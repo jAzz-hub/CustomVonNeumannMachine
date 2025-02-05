@@ -2,8 +2,7 @@
 #define CACHE_H
 
 
-#include "MEMORYCELL.h"
-#include "MAINMEMORY.h"
+#include "MAINMEMORY.h" // Ensure this header file defines the MainMemory class
 #include "stdbool.h"
 
 
@@ -14,22 +13,21 @@ using namespace std;
 struct Cache{
 	int NumOfj;
 	int NumOfi;
-	MemoryCell **words;
 
 	int size = 2048;
 
 	std::list<std::pair<uint32_t, uint32_t>> lru_list; 
 
-    std::unordered_map<uint32_t, std::list<std::pair<uint32_t, uint32_t>>::iterator> cache_map; 
+    std::unordered_map<uint32_t, std::list<std::pair<uint32_t, uint32_t>>::iterator> cache_map;
 
-    MainMemory& main_memory;
+	MemoryCell **words;
+
+	MainMemory aux_ram = MainMemory();
+
+	Cache() : NumOfj(size), NumOfi(size), words(NULL){}
 
 
-	Cache() : NumOfj(size), NumOfi(size), words(NULL), main_memory(main_memory){}
-
-
-	Cache(int NumOfj, int NumOfi, MainMemory& main_memory) : main_memory(main_memory) {
-
+	Cache(int NumOfj, int NumOf){
 		this->NumOfi = NumOfi;
 		this->NumOfj = NumOfj;
 		words =  (MemoryCell**)malloc( sizeof(MemoryCell*) * this->NumOfi);
@@ -55,8 +53,7 @@ struct Cache{
 	uint32_t read(uint32_t address);
 	void write(uint32_t address, uint32_t data);
 
-//	void ShowBit(int NumOfj, int NumOfi);
-//	void WriteBit(REGISTER value, int iTarget, int jTarget);
+
 
 };
 #endif

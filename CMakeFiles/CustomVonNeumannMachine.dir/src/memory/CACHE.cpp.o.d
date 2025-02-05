@@ -1,7 +1,9 @@
-CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o: \
- /home/jeje/clones/CustomVonNeumannMachine/src/core.cpp \
+CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o: \
+ /home/jeje/clones/CustomVonNeumannMachine/src/memory/CACHE.cpp \
  /usr/include/stdc-predef.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/core.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/memory/CACHE.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/memory/MAINMEMORY.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/memory/MEMORYCELL.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -155,11 +157,8 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc \
- /home/jeje/clones/CustomVonNeumannMachine/src/memory/CACHE.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/memory/MAINMEMORY.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/memory/MEMORYCELL.h \
- /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/list \
+ /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/allocated_ptr.h \
  /usr/include/c++/13/ext/aligned_buffer.h \
  /usr/include/c++/13/bits/list.tcc /usr/include/c++/13/unordered_map \
@@ -191,62 +190,4 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/core.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/inttypes.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/REGISTER_BANK.h \
- /usr/include/c++/13/iomanip /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h /usr/include/c++/13/ctime \
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h \
- /usr/include/c++/13/bits/quoted_string.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/REGISTER.h \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/array /usr/include/c++/13/bits/stl_algo.h \
- /usr/include/c++/13/bits/algorithmfwd.h \
- /usr/include/c++/13/bits/stl_heap.h \
- /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/map \
- /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
- /usr/include/c++/13/bits/stl_multimap.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/CONTROL_UNIT.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/ALU.h \
- /usr/include/c++/13/any \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/REGISTER_BANK.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/HashRegister.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/cpu/../memory/MAINMEMORY.h \
- /usr/include/c++/13/cmath /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /usr/include/c++/13/bits/specfun.h /usr/include/c++/13/limits \
- /usr/include/c++/13/tr1/gamma.tcc \
- /usr/include/c++/13/tr1/special_function_util.h \
- /usr/include/c++/13/tr1/bessel_function.tcc \
- /usr/include/c++/13/tr1/beta_function.tcc \
- /usr/include/c++/13/tr1/ell_integral.tcc \
- /usr/include/c++/13/tr1/exp_integral.tcc \
- /usr/include/c++/13/tr1/hypergeometric.tcc \
- /usr/include/c++/13/tr1/legendre_function.tcc \
- /usr/include/c++/13/tr1/modified_bessel_func.tcc \
- /usr/include/c++/13/tr1/poly_hermite.tcc \
- /usr/include/c++/13/tr1/poly_laguerre.tcc \
- /usr/include/c++/13/tr1/riemann_zeta.tcc \
- /home/jeje/clones/CustomVonNeumannMachine/src/process.h \
- /usr/include/c++/13/random /usr/include/c++/13/bits/random.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/opt_random.h \
- /usr/include/c++/13/bits/random.tcc /usr/include/c++/13/numeric \
- /usr/include/c++/13/bits/stl_numeric.h \
- /usr/include/c++/13/pstl/glue_numeric_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/REGISTER_BANK.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/CONTROL_UNIT.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./memory/MAINMEMORY.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./loader.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/././memory/CACHE.h
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h

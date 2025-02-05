@@ -1,6 +1,6 @@
 
 
-#include"./memory/MAINMEMORY.h"
+#include"./memory/CACHE.h"
 
 const int MEMORY_SIZE = 2048*2048; // 32-bit address space
 
@@ -8,7 +8,7 @@ std::string padName(const std::string& name) {
     return name + std::string(16 - name.length(), '#');
 }
 
-void loadProgramInRam(const std::string& inputFile, MainMemory & ram) {
+void loadProgramInRam(const std::string& inputFile, MainMemory & ram, std::vector<std::string> *core_instructions) {
     std::ifstream file(inputFile);
     if (!file.is_open()) {
         std::cerr << "Error opening file!" << std::endl;
@@ -117,10 +117,15 @@ void loadProgramInRam(const std::string& inputFile, MainMemory & ram) {
         }
         memAddress++;
     }
-
+    // itere e print valores de instruction:
+    for (auto instruction : instructions) {
+        std::cout << instruction << std::endl;
+    }
+    // Quero passar esses valores para o core_instructions
+    *core_instructions = instructions;
 }
 
-void loadProgramInCache(const std::string& inputFile, Cache & mem) {
+void loadProgramInCache(const std::string& inputFile, Cache & mem, std::vector<std::string> *core_instructions) {
     std::ifstream file(inputFile);
     if (!file.is_open()) {
         std::cerr << "Error opening file!" << std::endl;
@@ -229,6 +234,7 @@ void loadProgramInCache(const std::string& inputFile, Cache & mem) {
         }
         memAddress++;
     }
-
+    // Quero passar esses valores para o core_instructions
+    *core_instructions = instructions;
 }
 

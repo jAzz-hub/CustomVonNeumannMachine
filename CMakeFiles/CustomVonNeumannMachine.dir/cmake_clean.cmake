@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/CustomVonNeumannMachine.dir/src/loader.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o.d"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o"
+  "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MAINMEMORY.cpp.o"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MAINMEMORY.cpp.o.d"
   "CMakeFiles/CustomVonNeumannMachine.dir/src/memory/MEMORYCELL.cpp.o"

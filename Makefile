@@ -358,6 +358,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/memory/CACHE.o: src/memory/CACHE.cpp.o
+.PHONY : src/memory/CACHE.o
+
+# target to build an object file
+src/memory/CACHE.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.o
+.PHONY : src/memory/CACHE.cpp.o
+
+src/memory/CACHE.i: src/memory/CACHE.cpp.i
+.PHONY : src/memory/CACHE.i
+
+# target to preprocess a source file
+src/memory/CACHE.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.i
+.PHONY : src/memory/CACHE.cpp.i
+
+src/memory/CACHE.s: src/memory/CACHE.cpp.s
+.PHONY : src/memory/CACHE.s
+
+# target to generate assembly for a file
+src/memory/CACHE.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/memory/CACHE.cpp.s
+.PHONY : src/memory/CACHE.cpp.s
+
 src/memory/MAINMEMORY.o: src/memory/MAINMEMORY.cpp.o
 .PHONY : src/memory/MAINMEMORY.o
 
@@ -491,6 +515,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/memory/CACHE.o"
+	@echo "... src/memory/CACHE.i"
+	@echo "... src/memory/CACHE.s"
 	@echo "... src/memory/MAINMEMORY.o"
 	@echo "... src/memory/MAINMEMORY.i"
 	@echo "... src/memory/MAINMEMORY.s"

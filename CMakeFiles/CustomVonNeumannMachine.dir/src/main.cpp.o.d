@@ -216,17 +216,19 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o: \
  /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/REGISTER.h \
- /usr/include/c++/13/cinttypes /usr/include/inttypes.h \
- /usr/include/string.h /usr/include/strings.h \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
  /usr/include/c++/13/bits/hashtable_policy.h \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/array \
- /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/bitset \
+ /usr/include/c++/13/cinttypes /usr/include/inttypes.h \
+ /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
+ /usr/include/c++/13/array /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
@@ -240,6 +242,8 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o: \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/HashRegister.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/../memory/MAINMEMORY.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/../memory/MEMORYCELL.h \
+ /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
+ /usr/include/c++/13/bits/list.tcc \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/../memory/../cpu/REGISTER.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /usr/include/c++/13/cmath /usr/include/math.h \
@@ -266,9 +270,10 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o: \
  /usr/include/c++/13/tr1/riemann_zeta.tcc \
  /home/jeje/clones/CustomVonNeumannMachine/src/./memory/MAINMEMORY.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./loader.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/././memory/CACHE.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/././memory/MAINMEMORY.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./core.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./memory/MAINMEMORY.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/./memory/CACHE.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/REGISTER_BANK.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./cpu/CONTROL_UNIT.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./process.h \
@@ -280,9 +285,18 @@ CMakeFiles/CustomVonNeumannMachine.dir/src/main.cpp.o: \
  /usr/include/c++/13/pstl/execution_defs.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/././cpu/REGISTER_BANK.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/././cpu/CONTROL_UNIT.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/././memory/MAINMEMORY.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/././loader.h \
- /home/jeje/clones/CustomVonNeumannMachine/src/./././memory/MAINMEMORY.h \
+ /home/jeje/clones/CustomVonNeumannMachine/src/./././memory/CACHE.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./process.h \
+ /usr/include/c++/13/unordered_set \
+ /usr/include/c++/13/bits/unordered_set.h /usr/include/c++/13/chrono \
+ /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/format \
+ /usr/include/c++/13/charconv /usr/include/c++/13/optional \
+ /usr/include/c++/13/span /usr/include/c++/13/variant \
+ /usr/include/c++/13/bits/ranges_algobase.h /usr/include/c++/13/set \
+ /usr/include/c++/13/bits/stl_set.h \
+ /usr/include/c++/13/bits/stl_multiset.h \
  /home/jeje/clones/CustomVonNeumannMachine/src/./PCB.h \
  /usr/include/c++/13/deque /usr/include/c++/13/bits/stl_deque.h \
  /usr/include/c++/13/bits/deque.tcc \

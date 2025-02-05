@@ -23,7 +23,7 @@ using namespace std;
 
 struct core {
     MainMemory ram = MainMemory(2048,2048);				//  1º  Cria-se uma variável do tipo MainMemory com 2048 linhas e 2048 colunas.
-    Cache cache_mem = Cache(2048, 2048, ram);
+    Cache cache_mem = Cache(2048, 2048);
     REGISTER_BANK registers;
     Control_Unit UC;
     int counterForEnd = 5;
@@ -35,18 +35,20 @@ struct core {
     Instruction_Data data;
     process proc; // Renamed to avoid conflict
     bool cache;
+    std::vector<std::string> core_instructions;
+    
 
     // core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem)
     //     : ram(memory), registers(registers), UC(uc), counterForEnd(cForEnd), counter(counter), clock(clock), endProgram(endP), data(instruction_D), proc(proc), cache(cache), cache_mem(cache_mem)
     // {
     // }
 
-    core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0), cache(false), cache_mem(Cache(2048,2048, ram)){}
+    core() : ram(2048,2048), registers(), UC(), counterForEnd(5), counter(0), clock(0), endProgram(false), data(), proc("", 0, "", 0, 0), cache(false), cache_mem(Cache(2048,2048)){}
 
     core(MainMemory memory, REGISTER_BANK registers, Control_Unit uc, int cForEnd, int counter, int clock, bool endP, Instruction_Data instruction_D, process proc, bool cache, Cache cache_mem);
 
     void start();
-    core& running_asm(string scheduller);
+    core& running_asm(string scheduller, int similarity_caching_time);
     void execute();
     void setProcess(process &proc);
 

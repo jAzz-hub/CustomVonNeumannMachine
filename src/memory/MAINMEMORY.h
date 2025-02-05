@@ -2,7 +2,6 @@
 #define MAINMEMORY_H
 
 #include "MEMORYCELL.h"
-#include "CACHE.h"
 #include "stdbool.h"
 
 using namespace std;
@@ -33,7 +32,7 @@ struct MainMemory{
 		
 	}
 
-        void InsertData(const uint32_t data, int iTarget, int jTarget);
+	void InsertData(const uint32_t data, int iTarget, int jTarget);
 	void EraseData(int iTarget, int jTarget);
 	bool EmptyLine(int i) const;
 	void WriteMem(const uint32_t address, const uint32_t data);

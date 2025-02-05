@@ -16,29 +16,30 @@ bool MainMemory::EmptyLine(int i) const
 
 void MainMemory::InsertData(const uint32_t data, int iTarget, int jTarget)
 {
-        sleep(2);
-        bool hA = iTarget<NumOfi && jTarget<NumOfj;
-        bool hB = iTarget>=0 && jTarget>=0;
+    bool hA = iTarget<NumOfi && jTarget<NumOfj;
+    bool hB = iTarget>=0 && jTarget>=0;
 
 
-        if (hA && hB)  words[iTarget][jTarget].write(data);
+    if (hA && hB)  words[iTarget][jTarget].write(data);
 
-        else printf("Os valores de inserção de i e j são muito grandes!!");
+    else printf("Os valores de inserção de i e j são muito grandes!!");
 
 }
 
 void MainMemory::EraseData(int iTarget, int jTarget)
 {
-        bool hA = iTarget<NumOfi && jTarget<NumOfj;
-        bool hB = iTarget>=0 && jTarget>=0;
+    
+    bool hA = iTarget<NumOfi && jTarget<NumOfj;
+    bool hB = iTarget>=0 && jTarget>=0;
 
-        if (hA && hB) words[iTarget][jTarget].write(0);
+    if (hA && hB) words[iTarget][jTarget].write(0);
 
-        else printf("Os valores para deleção de i e j são muito grandes!!");
+    else printf("Os valores para deleção de i e j são muito grandes!!");
 }
 
 
 void MainMemory::WriteMem(const uint32_t address, const uint32_t data) {
+    
     if (address >= NumOfi * NumOfj) {
         printf("Endereço inválido!\n");
         return;
@@ -49,6 +50,7 @@ void MainMemory::WriteMem(const uint32_t address, const uint32_t data) {
 }
 
 const uint32_t MainMemory::ReadMem(const uint32_t address) {
+    
     if (address >= NumOfi * NumOfj) {
         printf("Endereço inválido!\n");
         return -1; 

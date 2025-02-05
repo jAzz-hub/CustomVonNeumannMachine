@@ -8,9 +8,12 @@
 #include "./loader.h"
 #include "./core.h"
 #include "./process.h"
+#include <unordered_set>
+#include <chrono>
+#include <set>
 #include "./PCB.h"
 const string scheduler = "RR";
-
+bool cache = true;
 // Processo é criado
 
 // Processo recebe uma UC
@@ -22,9 +25,27 @@ condition_variable cv;
 bool turnA = true;
 size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
-bool cache = false;
 
-void thread_A_start(core &c1, PCB &pcb) {
+
+using container = std::vector<std::vector<string>>;
+void thread_A_start(core &c1, PCB &pcb, core &c2) {
+    int similarity_caching_time = c1.core_instructions.size() * 650;
+    if (cache)
+    {
+        std::sort(c1.core_instructions.begin(), c1.core_instructions.end());
+        std::sort(c2.core_instructions.begin(), c2.core_instructions.end());
+
+        std::vector<std::string> intersection;
+        std::set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
+                          c2.core_instructions.begin(), c2.core_instructions.end(),
+                          std::back_inserter(intersection));
+        
+        if (intersection.empty()) similarity_caching_time = (similarity_caching_time/4);
+        else similarity_caching_time = similarity_caching_time/2;
+    }
+    else
+        similarity_caching_time = 3000;
+
     while (true)
     { // loop infinito
         unique_lock<mutex> lock(mtx); // lock mutex
@@ -38,7 +59,14 @@ void thread_A_start(core &c1, PCB &pcb) {
 
         cout << "Thread A is running process " << c1.proc.id << endl;        
         
-        c1.running_asm(pcb.scheduller); // run the process with the burst time
+
+        // calcular valor de similaridade entre instructions do core 1 e instructions do core 2
+        // esse valor verifica quantos elementos esses vectors tem em comum
+        // quanto mais valores ambos os vectores tem em comum menor é esse número e quanto mais diferentes eles são maior ele é
+        // esse valor varia de 0 à 3000 e é calculado pela função similarity_caching
+        
+
+        c1.running_asm(pcb.scheduller, similarity_caching_time); // run the process with the burst time
         
         cout << "Thread A is interrupted" << endl;
         
@@ -54,7 +82,22 @@ void thread_A_start(core &c1, PCB &pcb) {
 }
 
 
-void thread_B_start(core &c2, PCB &pcb) {
+void thread_B_start(core &c2, PCB &pcb, core &c1) {
+    int similarity_caching_time = c2.core_instructions.size() * 650;
+    
+    if (cache)
+    {
+        std::sort(c1.core_instructions.begin(), c1.core_instructions.end());
+        std::sort(c2.core_instructions.begin(), c2.core_instructions.end());
+
+        std::vector<std::string> intersection;
+        std::set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
+                          c2.core_instructions.begin(), c2.core_instructions.end(),
+                          std::back_inserter(intersection));
+        
+        if (intersection.empty()) similarity_caching_time = (similarity_caching_time/4);
+        else similarity_caching_time = similarity_caching_time/2;
+    }
     while (true) {
         unique_lock<mutex> lock(mtx);
         cv.wait(lock, [] { return !turnA; });
@@ -66,7 +109,12 @@ void thread_B_start(core &c2, PCB &pcb) {
         }
 
         cout << "Thread B is running process " << c2.proc.id << endl;
-        c2.running_asm(pcb.scheduller);
+        // if (cache)
+        //     similarity_caching(c2.core_instructions, c1.core_instructions, &similarity_caching_time);
+        // else
+        //     similarity_caching_time = 3000;
+
+        c2.running_asm(pcb.scheduller, similarity_caching_time);
         cout << "Thread B is interrupted" << endl;
 
         // Move the process to the end of the queue
@@ -95,13 +143,23 @@ void running_cores(PCB pcb)
             cout << "All cores have been processed." << endl;
             return;
         }
-    
 
-        thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb));
-        thread t2(thread_B_start, ref(pcb.cores[1]), ref(pcb));
-
-        t1.join();
-        t2.join();
+        
+        if (pcb.cores.size() == 1)
+        {
+            thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb), ref(pcb.cores[0]));
+            t1.join();
+            cout<<"AQUII 1111";
+        }
+        else
+        {
+            thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb), ref(pcb.cores[1]));
+            thread t2(thread_B_start, ref(pcb.cores[1]), ref(pcb), ref(pcb.cores[0]));
+            
+            t1.join();
+            t2.join();
+        }
+        
 
         // Incrementar o contador de iterações e imprimir métricas
         iteration_count++;
@@ -117,6 +175,7 @@ void running_cores(PCB pcb)
 }
 
 using namespace std;
+using namespace std::chrono;
 int main(int argc, char* argv[]){
 
 
@@ -145,8 +204,16 @@ int main(int argc, char* argv[]){
         cout<<"Sorted cores by burst time"<<endl;
     }
 
+    auto start = high_resolution_clock::now();
     running_cores(pcb);
-
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(stop - start);
+    
+    if (cache)
+        cout << "Escalonando com" << scheduler <<"e caching: " << duration.count() << " ms" << endl;
+    else
+       cout << "Escalonando com" << scheduler <<"e sem caching" << duration.count() << " ms" << endl;
+    
     return 0;
 }
 
