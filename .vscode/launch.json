@@ -6,7 +6,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/CustomVonNeumannMachine",
-            "args": ["outputs/outsomacesar.bin", "outputex.bin"], // Add arguments if needed
+            "args": ["outputs2/outioop.bin", "outputs2/outsumdec.bin"], // Add arguments if needed
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
