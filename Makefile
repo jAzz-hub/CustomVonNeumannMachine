@@ -166,6 +166,30 @@ assembler/assembler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Assembler.dir/build.make CMakeFiles/Assembler.dir/assembler/assembler.cpp.s
 .PHONY : assembler/assembler.cpp.s
 
+src/Addressmapping.o: src/Addressmapping.cpp.o
+.PHONY : src/Addressmapping.o
+
+# target to build an object file
+src/Addressmapping.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/Addressmapping.cpp.o
+.PHONY : src/Addressmapping.cpp.o
+
+src/Addressmapping.i: src/Addressmapping.cpp.i
+.PHONY : src/Addressmapping.i
+
+# target to preprocess a source file
+src/Addressmapping.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/Addressmapping.cpp.i
+.PHONY : src/Addressmapping.cpp.i
+
+src/Addressmapping.s: src/Addressmapping.cpp.s
+.PHONY : src/Addressmapping.s
+
+# target to generate assembly for a file
+src/Addressmapping.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomVonNeumannMachine.dir/build.make CMakeFiles/CustomVonNeumannMachine.dir/src/Addressmapping.cpp.s
+.PHONY : src/Addressmapping.cpp.s
+
 src/PCB.o: src/PCB.cpp.o
 .PHONY : src/PCB.o
 
@@ -491,6 +515,9 @@ help:
 	@echo "... assembler/assembler.o"
 	@echo "... assembler/assembler.i"
 	@echo "... assembler/assembler.s"
+	@echo "... src/Addressmapping.o"
+	@echo "... src/Addressmapping.i"
+	@echo "... src/Addressmapping.s"
 	@echo "... src/PCB.o"
 	@echo "... src/PCB.i"
 	@echo "... src/PCB.s"

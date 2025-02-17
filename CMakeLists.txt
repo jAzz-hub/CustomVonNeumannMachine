@@ -6,6 +6,8 @@ add_executable(CustomVonNeumannMachine
         src/main.cpp
         src/core.cpp
         src/core.h
+	src/Addressmapping.cpp
+	src/Addressmapping.h
         src/process.cpp
         src/process.h
         src/loader.cpp

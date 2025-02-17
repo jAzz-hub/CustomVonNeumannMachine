@@ -4,7 +4,7 @@
 #include <deque>
 #include <string>
 #include "core.h"
-
+#include "Addressmapping.h"
 
 // Salva todos os processos na memória
 // Roda todos no loader 1 de cada vez
@@ -12,13 +12,15 @@
 // monta a fila de prontos
 // 
 // 
+using namespace std;
 
 struct PCB {
-    std::deque<core> cores;
-    std::deque<core> zombies;
+    deque<core> cores;
+    deque<core> zombies;
     string scheduller;
+    Addressmapping address_mapping;
 
-    PCB(const std::vector<std::string>& input_programs, string scheduller,bool cache);
+    PCB(const vector<string>& input_programs, string scheduller, bool cache);
     void zombie_check();
     void zombies_info();
     void cores_info();
@@ -28,6 +30,7 @@ struct PCB {
     int burster(string program);
     bool SJF();
     bool RR();
+    core& get_core(int address);
 };
 
 #endif

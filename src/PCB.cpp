@@ -1,5 +1,9 @@
 #include "PCB.h"
 
+// fazer com que ao invés de grandes structs serem ordenadas
+// que sejam ordenadas labels, para que o programa ganhe performance
+// de modo que essas labels representem a paginação.
+
 
 PCB::PCB(const vector<string>& input_programs, string scheduller, bool cache) {
     int id_counter = 0;
@@ -25,6 +29,7 @@ PCB::PCB(const vector<string>& input_programs, string scheduller, bool cache) {
             cores.push_back(new_core);
         }
     }
+    address_mapping.generate_addresses(cores.size());
 }
 
 void PCB::turn_zombie(int core_index){
@@ -179,11 +184,16 @@ int PCB::burster(string program)
 }
 
 //ordena os cores de acordo com seu valor de burst time
-void PCB::sorting_cores()
-{
-    sort(cores.begin(), cores.end(), [](core a, core b) {
-        return a.proc.burst_time < b.proc.burst_time;
-    });
+void PCB::sorting_cores() {
+    vector<int> burst_times(cores.size());
+    for (size_t i = 0; i < cores.size(); ++i) {
+        burst_times[i] = cores[i].proc.burst_time;
+    }
+    address_mapping.sort_addresses(burst_times);
+}
+
+core& PCB::get_core(int address) {
+    return cores[address];
 }
 
 bool PCB::SJF()

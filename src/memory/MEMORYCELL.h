@@ -1,10 +1,7 @@
 #ifndef MEMORYCELL_HPP
 #define MEMORYCELL_HPP
 
-#include <iostream>
-#include <string>
-#include <list>
-#include <unordered_map>
+
 #include "../cpu/REGISTER.h"
 
 struct MemoryCell

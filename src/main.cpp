@@ -8,12 +8,9 @@
 #include "./loader.h"
 #include "./core.h"
 #include "./process.h"
-#include <unordered_set>
-#include <chrono>
-#include <set>
 #include "./PCB.h"
-const string scheduler = "RR";
-bool cache = true;
+const string scheduler = "FCFS";
+bool cache = false;
 // Processo é criado
 
 // Processo recebe uma UC
@@ -27,18 +24,18 @@ size_t currentProcessIndex = 0;
 bool allProcessesConsumed = false;
 
 
-using container = std::vector<std::vector<string>>;
+using container = vector<vector<string>>;
 void thread_A_start(core &c1, PCB &pcb, core &c2) {
     int similarity_caching_time = c1.core_instructions.size() * 650;
     if (cache)
     {
-        std::sort(c1.core_instructions.begin(), c1.core_instructions.end());
-        std::sort(c2.core_instructions.begin(), c2.core_instructions.end());
+        sort(c1.core_instructions.begin(), c1.core_instructions.end());
+        sort(c2.core_instructions.begin(), c2.core_instructions.end());
 
-        std::vector<std::string> intersection;
-        std::set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
+        vector<string> intersection;
+        set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
                           c2.core_instructions.begin(), c2.core_instructions.end(),
-                          std::back_inserter(intersection));
+                          back_inserter(intersection));
         
         if (intersection.empty()) similarity_caching_time = (similarity_caching_time/4);
         else similarity_caching_time = similarity_caching_time/2;
@@ -57,7 +54,8 @@ void thread_A_start(core &c1, PCB &pcb, core &c2) {
             return;
         }
 
-        cout << "Thread A is running process " << c1.proc.id << endl;        
+        int core_address = pcb.address_mapping.get_address(0);
+        cout << "Thread A is running process " << pcb.get_core(core_address).proc.id << endl;        
         
 
         // calcular valor de similaridade entre instructions do core 1 e instructions do core 2
@@ -87,13 +85,13 @@ void thread_B_start(core &c2, PCB &pcb, core &c1) {
     
     if (cache)
     {
-        std::sort(c1.core_instructions.begin(), c1.core_instructions.end());
-        std::sort(c2.core_instructions.begin(), c2.core_instructions.end());
+        sort(c1.core_instructions.begin(), c1.core_instructions.end());
+        sort(c2.core_instructions.begin(), c2.core_instructions.end());
 
-        std::vector<std::string> intersection;
-        std::set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
+        vector<string> intersection;
+        set_intersection(c1.core_instructions.begin(), c1.core_instructions.end(),
                           c2.core_instructions.begin(), c2.core_instructions.end(),
-                          std::back_inserter(intersection));
+                          back_inserter(intersection));
         
         if (intersection.empty()) similarity_caching_time = (similarity_caching_time/4);
         else similarity_caching_time = similarity_caching_time/2;
@@ -108,7 +106,8 @@ void thread_B_start(core &c2, PCB &pcb, core &c1) {
             return;
         }
 
-        cout << "Thread B is running process " << c2.proc.id << endl;
+        int core_address = pcb.address_mapping.get_address(1);
+        cout << "Thread B is running process " << pcb.get_core(core_address).proc.id << endl;
         // if (cache)
         //     similarity_caching(c2.core_instructions, c1.core_instructions, &similarity_caching_time);
         // else
@@ -147,14 +146,17 @@ void running_cores(PCB pcb)
         
         if (pcb.cores.size() == 1)
         {
-            thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb), ref(pcb.cores[0]));
+            int core_address = pcb.address_mapping.get_address(0);
+            thread t1(thread_A_start, ref(pcb.get_core(core_address)), ref(pcb), ref(pcb.get_core(core_address)));
             t1.join();
             cout<<"AQUII 1111";
         }
         else
         {
-            thread t1(thread_A_start, ref(pcb.cores[0]), ref(pcb), ref(pcb.cores[1]));
-            thread t2(thread_B_start, ref(pcb.cores[1]), ref(pcb), ref(pcb.cores[0]));
+            int core_address1 = pcb.address_mapping.get_address(0);
+            int core_address2 = pcb.address_mapping.get_address(1);
+            thread t1(thread_A_start, ref(pcb.get_core(core_address1)), ref(pcb), ref(pcb.get_core(core_address2)));
+            thread t2(thread_B_start, ref(pcb.get_core(core_address2)), ref(pcb), ref(pcb.get_core(core_address1)));
             
             t1.join();
             t2.join();
@@ -175,18 +177,18 @@ void running_cores(PCB pcb)
 }
 
 using namespace std;
-using namespace std::chrono;
+using namespace chrono;
 int main(int argc, char* argv[]){
 
 
     //Printar os dois nomes dos programas caso haja menos de 1 entrada
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <input_file1> <input_file2> ..." << std::endl;
+        cerr << "Usage: " << argv[0] << " <input_file1> <input_file2> ..." << endl;
         return 1;
     }
 
     //Criar um vetor de strings com os nomes dos programas tirando o último elemento
-    std::vector<std::string> input_programs(argv + 1, argv + argc - 1);
+    vector<string> input_programs(argv + 1, argv + argc - 1);
 
     PCB pcb = PCB(input_programs, argv[argc-1], cache);
 
